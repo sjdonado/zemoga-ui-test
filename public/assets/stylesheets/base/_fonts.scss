@@ -1,0 +1,18 @@
+$lato-font-path: "../fonts/Lato";
+
+@font-face {
+  src: url("#{$lato-font-path}/Lato-Light.ttf") format("truetype");
+  font-family: "Lato";
+  font-weight: 100;
+}
+
+@font-face {
+  src: url("#{$lato-font-path}/Lato-Regular.ttf") format("truetype");
+  font-family: "Lato";
+}
+
+@font-face {
+  src: url("#{$lato-font-path}/Lato-Bold.ttf") format("truetype");
+  font-family: "Lato";
+  font-weight: bold;
+}
