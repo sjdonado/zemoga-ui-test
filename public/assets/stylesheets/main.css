@@ -846,14 +846,15 @@ button {
 .card-content .thumb-decorator {
   flex: 1;
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: flex-start;
+  margin-bottom: 117px;
+  min-width: 34px;
 }
 .card-content .thumb-decorator div {
   display: table;
   width: 26px;
   height: 26px;
-  margin-top: 9px;
 }
 .card-content .thumb-decorator span {
   display: table-cell;
@@ -868,9 +869,22 @@ button {
   flex-direction: column;
 }
 .card-content .right-container h3 {
+  max-width: 200px;
   font-weight: 400;
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+@media screen and (min-width: 767px) {
+  .card-content .right-container h3 {
+    max-width: 240px;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .card-content .right-container h3 {
+    max-width: 320px;
+  }
 }
 .card-content .right-container .card-details {
   font-size: 0.675rem;
