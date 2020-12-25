@@ -1,2 +1,30 @@
 // Global page right-left margin
-$page-margin: 24px;
+$page-margin: 10%;
+
+// Colors palette
+$white: #fff;
+$light-grey: #ebebeb;
+$orange: #ffad1d;
+$orange-alpha: rgba(255, 173, 29, 0.9);
+$blue: #1cbbb4;
+$blue-alpha: rgba(28, 187, 180, 0.9);
+
+$font-sizes: (
+  "xs": 0.75rem,
+  "sm": 1.2rem,
+  "md": 1.6rem,
+  "lg": 2.4rem,
+  "xl": 3.2rem,
+);
+
+$breakpoints: (
+  "small": (
+    min-width: 767px,
+  ),
+  "medium": (
+    min-width: 992px,
+  ),
+  "large": (
+    min-width: 1200px,
+  ),
+) !default;

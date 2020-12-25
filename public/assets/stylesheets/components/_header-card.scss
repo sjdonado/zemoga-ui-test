@@ -1,0 +1,55 @@
+.header-card {
+  margin-left: $page-margin;
+  width: 360px;
+  color: $white;
+  .content {
+    padding: 24px 48px 0 24px;
+    background-color: rgba(80, 80, 80, 0.527);
+    h5,
+    p {
+      font-weight: 200;
+      color: $light-grey;
+    }
+    h5 {
+      font-size: small;
+    }
+    h2 {
+      font-size: 42px;
+      font-weight: normal;
+    }
+    .more-info {
+      display: flex;
+      align-items: center;
+      font-size: x-small;
+      text-decoration: underline;
+      font-weight: lighter;
+      span {
+        padding-top: 4px;
+        padding-right: 2px;
+        font-size: 14px;
+      }
+    }
+    p {
+      font-size: medium;
+    }
+    h3 {
+      font-size: small;
+      padding: 24px 0;
+    }
+  }
+  .thumb-btns {
+    display: flex;
+    button {
+      padding: 14px 0;
+      font-size: 28px;
+    }
+  }
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .header-card > .content {
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    background-color: rgba(80, 80, 80, 0.5);
+  }
+}
