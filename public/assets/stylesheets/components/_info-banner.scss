@@ -46,7 +46,4 @@
   @include respond-to("small") {
     padding: 6px 12px;
   }
-  @include respond-to("large") {
-    margin: 24px $page-margin * 1.8;
-  }
 }

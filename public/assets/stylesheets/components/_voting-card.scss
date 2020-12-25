@@ -133,7 +133,7 @@ $card-width: 269px;
   align-items: center;
   div {
     flex: 1;
-    padding: 6px;
+    padding: 6px 8px;
   }
   span {
     @include font-format("xl");
