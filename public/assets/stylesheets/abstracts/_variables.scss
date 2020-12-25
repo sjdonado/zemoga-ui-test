@@ -19,6 +19,26 @@ $blue-alpha: rgba(
 
 // source: https://tailwindcss.com/docs/font-size
 $font-sizes: (
+  "6xs": (
+    font-size: 0.475rem,
+    line-height: 0.8rem,
+  ),
+  "5xs": (
+    font-size: 0.55rem,
+    line-height: 0.85rem,
+  ),
+  "4xs": (
+    font-size: 0.575rem,
+    line-height: 0.875rem,
+  ),
+  "3xs": (
+    font-size: 0.65rem,
+    line-height: 0.95rem,
+  ),
+  "2xs": (
+    font-size: 0.675rem,
+    line-height: 0.975rem,
+  ),
   "xs": (
     font-size: 0.75rem,
     line-height: 1rem,

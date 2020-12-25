@@ -1,3 +1,5 @@
+$card-width: 390px;
+
 .header-voting-card {
   width: 100%;
   color: $white;
@@ -10,10 +12,10 @@
       color: $light-grey;
     }
     h5 {
-      @include font-format("xs");
+      @include font-format("sm");
     }
     h2 {
-      @include font-format("4xl");
+      @include font-format("5xl");
       font-weight: normal;
     }
     .more-info {
@@ -29,7 +31,7 @@
       }
     }
     p {
-      @include font-format("base");
+      @include font-format("lg");
       line-height: normal;
     }
     h3 {
@@ -40,21 +42,19 @@
   .thumb-btns {
     display: flex;
     button {
-      padding: 14px 0;
-      @include font-format("2xl");
+      padding: 12px 0;
+      @include font-format("3xl");
     }
   }
   @include respond-to("small") {
     margin-left: $page-margin;
-    width: 360px;
-    margin-bottom: 10px;
+    width: $card-width;
+    margin-top: 0;
+    margin-bottom: 8px;
   }
   @include respond-to("medium") {
-    margin-bottom: 26px;
-  }
-  @include respond-to("large") {
-    margin-top: 8%;
-    margin-bottom: 8%;
+    margin-top: 4%;
+    margin-bottom: 7%;
   }
 }
 

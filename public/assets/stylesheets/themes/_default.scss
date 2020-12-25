@@ -1,0 +1,20 @@
+div,
+button,
+input[type="radio"] {
+  &.orange {
+    color: $white;
+    background-color: $orange;
+  }
+  &.orange-alpha {
+    color: $white;
+    background-color: $orange-alpha;
+  }
+  &.blue {
+    color: $white;
+    background-color: $blue;
+  }
+  &.blue-alpha {
+    color: $white;
+    background-color: $blue-alpha;
+  }
+}

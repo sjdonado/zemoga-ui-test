@@ -1,0 +1,139 @@
+$card-width: 269px;
+
+.voting-card {
+  width: $card-width;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 22px;
+  img {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    color: $grey-card;
+  }
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: $card-width * 1.12;
+    color: $white;
+    background: linear-gradient(
+      to top,
+      rgba($color: black, $alpha: 0.6),
+      rgba(0, 0, 0, 0)
+    );
+  }
+  @include respond-to("small") {
+    $card-width: 320px;
+    margin-bottom: 22px;
+    width: $card-width;
+    .card-container {
+      height: $card-width * 1.12;
+    }
+  }
+  @include respond-to("medium") {
+    $card-width: 400px;
+    margin-bottom: 42px;
+    width: $card-width;
+    .card-container {
+      height: $card-width * 1.12;
+    }
+  }
+}
+
+.card-content {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+  .thumb-decorator {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    div {
+      display: table;
+      width: 26px;
+      height: 26px;
+      margin-top: 9px;
+    }
+    span {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      @include font-format("sm");
+    }
+  }
+  .right-container {
+    flex: 9;
+    display: flex;
+    flex-direction: column;
+    h3 {
+      font-weight: 400;
+      @include font-format("4xl");
+    }
+    .card-details {
+      @include font-format("2xs");
+      .date {
+        font-weight: bold;
+      }
+    }
+    .card-description {
+      min-height: 40px;
+      max-height: 40px;
+      font-weight: lighter;
+      margin-top: 10px 0;
+      @include font-format("sm");
+
+      text-overflow: ellipsis;
+      width: 220px;
+      word-wrap: break-word;
+      overflow: hidden;
+      @include respond-to("small") {
+        width: 300px;
+      }
+      @include respond-to("medium") {
+        width: 320px;
+      }
+    }
+    .card-vote-form {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      vertical-align: center;
+      input,
+      label {
+        margin: auto 4px;
+      }
+      input[type="submit"] {
+        padding: 6px 16px;
+        border: 1px solid $white;
+        background-color: transparent;
+        @include font-format("4xs");
+      }
+    }
+  }
+}
+
+.card-statistics {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  div {
+    flex: 1;
+    padding: 6px;
+  }
+  span {
+    @include font-format("xl");
+  }
+  .orange-alpha {
+    text-align: end;
+  }
+  .score {
+    @include font-format("2xl");
+    font-weight: lighter;
+  }
+}

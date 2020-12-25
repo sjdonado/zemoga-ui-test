@@ -5,7 +5,7 @@ $hamburguer-button-size: 16px;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  padding: 24px 6px 32% 6px;
+  padding: 24px 6px 29% 6px;
   color: $white;
   background: linear-gradient(
     to bottom,
@@ -38,6 +38,9 @@ $hamburguer-button-size: 16px;
     }
   }
   @include respond-to("small") {
+    padding: 22px $page-margin;
+  }
+  @include respond-to("medium") {
     padding: 32px $page-margin 48px $page-margin;
   }
 }
@@ -107,11 +110,15 @@ $hamburguer-button-size: 16px;
   &:checked ~ .navigation {
     visibility: visible;
     padding-top: 6px;
-    border-top: 1px solid $white;
+    border-top: 0.5px solid $white;
     background: linear-gradient(
       to bottom,
       rgba($color: $grey-card, $alpha: 0.3),
       rgba(0, 0, 0, 0)
     );
+    li {
+      margin-right: 3px;
+      text-decoration: underline;
+    }
   }
 }
