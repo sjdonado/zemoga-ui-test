@@ -12,9 +12,17 @@
 
 /// CSS3 rotation
 /// @param {Number} $degrees
-/// @require $degreess
 @mixin rotation($degrees) {
   -ms-transform: rotate($degrees);
   -webkit-transform: rotate($degrees);
   transform: rotate($degrees);
+}
+
+/// Font format
+/// @param {String} $size - Font size name
+/// @require $font-sizes
+@mixin font-format($size: "base") {
+  @each $property-name, $property-value in map-get($font-sizes, $size) {
+    #{$property-name}: $property-value;
+  }
 }

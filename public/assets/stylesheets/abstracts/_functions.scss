@@ -1,6 +1,5 @@
 /// Calculate line height
 /// @param {Number} $size
-/// @require $size
 @function calc-line-height($n) {
   @return $n / 5;
 }

@@ -432,25 +432,28 @@ button.blue-alpha {
 }
 .navbar h1 {
   flex: 4;
-  font-weight: normal;
-  font-size: x-large;
   min-width: 100px;
+  font-weight: normal;
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 .navbar .navigation {
   flex: 6;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  list-style-type: none;
-  font-size: small;
+  visibility: hidden;
   min-width: 314px;
   max-width: 500px;
-  visibility: hidden;
+  list-style-type: none;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 .navbar .navigation .icon-search {
   display: inline-block;
-  font-size: medium;
-  padding-top: 4px;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding-top: 6px;
 }
 @media screen and (min-width: 767px) {
   .navbar .navigation {
@@ -464,23 +467,23 @@ button.blue-alpha {
 }
 
 .hamburguer {
-  width: 16px;
-  height: 16px;
   display: block;
   position: relative;
-  background: none;
   margin: auto 12px;
+  width: 16px;
+  height: 16px;
+  background: none;
 }
 .hamburguer:after, .hamburguer:before,
 .hamburguer span,
 .hamburguer label {
   content: " ";
   display: block;
+  position: absolute;
+  left: 0;
   width: 100%;
   height: 3.2px;
   background: #fff;
-  left: 0;
-  position: absolute;
   -webkit-transition: all 300ms ease-in-out;
   transition: all 300ms ease-in-out;
 }
@@ -496,9 +499,9 @@ button.blue-alpha {
 .hamburguer label {
   width: 100%;
   height: 100%;
-  background: none;
   cursor: pointer;
   z-index: 1000;
+  background: none;
 }
 .hamburguer span {
   top: 6.4px;
@@ -531,8 +534,8 @@ button.blue-alpha {
 }
 #change-hamburguer:checked ~ .navigation {
   visibility: visible;
-  border-top: 1px solid #fff;
   padding-top: 6px;
+  border-top: 1px solid #fff;
   background: linear-gradient(to bottom, rgba(70, 70, 70, 0.3), rgba(0, 0, 0, 0));
 }
 
@@ -550,16 +553,19 @@ button.blue-alpha {
   color: #ebebeb;
 }
 .header-voting-card .content h5 {
-  font-size: small;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 .header-voting-card .content h2 {
-  font-size: 42px;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
   font-weight: normal;
 }
 .header-voting-card .content .more-info {
   display: flex;
   align-items: center;
-  font-size: x-small;
+  font-size: 0.75rem;
+  line-height: 1rem;
   text-decoration: underline;
   font-weight: lighter;
 }
@@ -569,18 +575,22 @@ button.blue-alpha {
   font-size: 14px;
 }
 .header-voting-card .content p {
-  font-size: medium;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  line-height: normal;
 }
 .header-voting-card .content h3 {
-  font-size: small;
   padding: 24px 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 .header-voting-card .thumb-btns {
   display: flex;
 }
 .header-voting-card .thumb-btns button {
   padding: 14px 0;
-  font-size: 28px;
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 @media screen and (min-width: 767px) {
   .header-voting-card {
@@ -608,12 +618,12 @@ button.blue-alpha {
     background-color: rgba(70, 70, 70, 0.5);
   }
 }
-.closing-in-banner {
+.closing-in {
   width: 100%;
   display: flex;
   height: 38px;
 }
-.closing-in-banner .left-wrapper {
+.closing-in .left-wrapper {
   flex: 29;
   display: flex;
   justify-content: flex-end;
@@ -621,26 +631,27 @@ button.blue-alpha {
   background-color: rgba(70, 70, 70, 0.3);
   color: #fff;
 }
-.closing-in-banner .left-wrapper span {
+.closing-in .left-wrapper span {
   text-transform: uppercase;
-  font-size: x-small;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
-.closing-in-banner .left-wrapper .icon-right-arrow {
+.closing-in .left-wrapper .icon-right-arrow {
   color: rgba(70, 70, 70, 0.3);
   font-size: 12px;
   transform: translate(87.6%);
   z-index: 2;
 }
-.closing-in-banner .separator {
+.closing-in .separator {
   flex: 2;
   background-color: rgba(255, 255, 255, 0.6);
 }
 @media screen and (min-width: 992px) {
-  .closing-in-banner .separator {
+  .closing-in .separator {
     background: linear-gradient(to left, rgba(255, 255, 255, 0.6), transparent);
   }
 }
-.closing-in-banner .days-remaining {
+.closing-in .days-remaining {
   flex: 69;
   display: flex;
   align-items: center;
@@ -649,12 +660,78 @@ button.blue-alpha {
   color: #464646;
   padding-bottom: 2px;
 }
-.closing-in-banner .days-remaining span {
-  font-size: x-large;
+.closing-in .days-remaining span {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
-.closing-in-banner .days-remaining span:not(.counter) {
+.closing-in .days-remaining span:not(.counter) {
   font-weight: lighter;
   margin-left: 6px;
+}
+
+.info-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 24px 8%;
+  padding: 12px;
+  background-color: #ebebeb;
+}
+.info-banner .title-wrapper {
+  flex: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 158px;
+}
+.info-banner .title-wrapper h5 {
+  font-weight: lighter;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  line-height: normal;
+}
+.info-banner .title-wrapper h4 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  line-height: normal;
+}
+.info-banner p {
+  flex: 89;
+  font-weight: lighter;
+  min-width: 260px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+@media screen and (min-width: 767px) {
+  .info-banner p {
+    padding-left: 6px;
+  }
+}
+.info-banner .icon-cancel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 260px;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+@media screen and (min-width: 767px) {
+  .info-banner .icon-cancel {
+    min-width: 22px;
+  }
+}
+@media screen and (min-width: 767px) {
+  .info-banner {
+    padding: 6px 12px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .info-banner {
+    margin: 24px 14.4%;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
