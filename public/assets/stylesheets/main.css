@@ -405,8 +405,8 @@ header {
   margin: 24px 8%;
   font-weight: lighter;
   text-align: start;
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 .votes .section-content {
   display: flex;
@@ -491,6 +491,7 @@ button {
   flex: 4;
   min-width: 100px;
   font-weight: normal;
+  color: #fff;
   font-size: 1.5rem;
   line-height: 2rem;
 }
@@ -623,9 +624,10 @@ button {
   line-height: 1.25rem;
 }
 .header-voting-card .content h2 {
+  color: #fff;
+  font-weight: normal;
   font-size: 3rem;
   line-height: 1;
-  font-weight: normal;
 }
 .header-voting-card .content .more-info {
   display: flex;
@@ -647,6 +649,7 @@ button {
 }
 .header-voting-card .content h3 {
   padding: 24px 0;
+  color: #fff;
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
@@ -732,7 +735,7 @@ button {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 24px 8%;
+  margin: 32px 8%;
   padding: 12px;
   background-color: #ebebeb;
 }
@@ -751,9 +754,10 @@ button {
   line-height: normal;
 }
 .info-banner .title-container h4 {
+  color: #1e1e1e;
+  line-height: normal;
   font-size: 1.875rem;
   line-height: 2.25rem;
-  line-height: normal;
 }
 .info-banner p {
   flex: 89;
@@ -809,7 +813,6 @@ button {
   justify-content: flex-end;
   height: 301.28px;
   color: #fff;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
 }
 @media screen and (min-width: 767px) {
   .voting-card {
@@ -833,7 +836,8 @@ button {
 .card-content {
   display: flex;
   flex-direction: row;
-  margin-bottom: 16px;
+  padding: 48px 0 16px 0;
+  background: linear-gradient(to top, #1e1e1e, rgba(0, 0, 0, 0));
 }
 .card-content .thumb-decorator {
   flex: 1;
@@ -863,6 +867,7 @@ button {
 .card-content .right-container h3 {
   max-width: 200px;
   font-weight: 400;
+  color: #fff;
   font-size: 1.5rem;
   line-height: 2rem;
 }
@@ -1032,6 +1037,14 @@ button.blue-alpha,
 input[type=radio].blue-alpha {
   color: #fff;
   background-color: rgba(28, 187, 180, 0.8);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #464646;
 }
 
 /*# sourceMappingURL=main.css.map */

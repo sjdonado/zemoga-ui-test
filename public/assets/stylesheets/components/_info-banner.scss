@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 24px $page-margin;
+  margin: 32px $page-margin;
   padding: 12px;
   background-color: $grey-card-light;
   .title-container {
@@ -19,8 +19,9 @@
       line-height: normal;
     }
     h4 {
-      @include font-format("3xl");
+      color: $black;
       line-height: normal;
+      @include font-format("3xl");
     }
   }
   p {

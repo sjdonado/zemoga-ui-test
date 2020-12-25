@@ -15,8 +15,9 @@ $card-width: 390px;
       @include font-format("sm");
     }
     h2 {
-      @include font-format("5xl");
+      color: $white;
       font-weight: normal;
+      @include font-format("5xl");
     }
     .more-info {
       display: flex;
@@ -36,6 +37,7 @@ $card-width: 390px;
     }
     h3 {
       padding: 24px 0;
+      color: $white;
       @include font-format("sm");
     }
   }

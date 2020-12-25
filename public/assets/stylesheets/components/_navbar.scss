@@ -16,6 +16,7 @@ $hamburguer-button-size: 16px;
     flex: 4;
     min-width: 100px;
     font-weight: normal;
+    color: $white;
     @include font-format("2xl");
   }
   .navigation {
