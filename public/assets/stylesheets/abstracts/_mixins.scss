@@ -1,0 +1,20 @@
+/// Mixin to manage responsive breakpoints
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint: map-get($breakpoints, $breakpoint);
+    @media screen and (min-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+/// CSS3 rotation
+/// @param {Number} $degrees
+/// @require $degreess
+@mixin rotation($degrees) {
+  -ms-transform: rotate($degrees);
+  -webkit-transform: rotate($degrees);
+  transform: rotate($degrees);
+}

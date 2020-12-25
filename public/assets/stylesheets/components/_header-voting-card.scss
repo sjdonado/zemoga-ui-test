@@ -1,10 +1,9 @@
-.header-card {
-  margin-left: $page-margin;
-  width: 360px;
+.header-voting-card {
+  width: 100%;
   color: $white;
   .content {
     padding: 24px 48px 0 24px;
-    background-color: rgba(80, 80, 80, 0.527);
+    background-color: rgba($color: $grey-card, $alpha: 0.527);
     h5,
     p {
       font-weight: 200;
@@ -44,12 +43,24 @@
       font-size: 28px;
     }
   }
+  @include respond-to("small") {
+    margin-left: $page-margin;
+    width: 360px;
+    margin-bottom: 10px;
+  }
+  @include respond-to("medium") {
+    margin-bottom: 26px;
+  }
+  @include respond-to("large") {
+    margin-top: 8%;
+    margin-bottom: 8%;
+  }
 }
 
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-  .header-card > .content {
+  .header-voting-card > .content {
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
-    background-color: rgba(80, 80, 80, 0.5);
+    background-color: rgba($color: $grey-card, $alpha: 0.5);
   }
 }

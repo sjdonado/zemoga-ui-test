@@ -1,13 +1,20 @@
 // Global page right-left margin
-$page-margin: 10%;
+$page-margin: 8%;
 
 // Colors palette
 $white: #fff;
 $light-grey: #ebebeb;
 $orange: #ffad1d;
-$orange-alpha: rgba(255, 173, 29, 0.9);
 $blue: #1cbbb4;
-$blue-alpha: rgba(28, 187, 180, 0.9);
+$grey-card: #464646;
+$orange-alpha: rgba(
+  $color: #ffad1d,
+  $alpha: 0.8,
+);
+$blue-alpha: rgba(
+  $color: #1cbbb4,
+  $alpha: 0.8,
+);
 
 $font-sizes: (
   "xs": 0.75rem,
@@ -18,13 +25,7 @@ $font-sizes: (
 );
 
 $breakpoints: (
-  "small": (
-    min-width: 767px,
-  ),
-  "medium": (
-    min-width: 992px,
-  ),
-  "large": (
-    min-width: 1200px,
-  ),
-) !default;
+  "small": 767px,
+  "medium": 992px,
+  "large": 1200px,
+);

@@ -399,7 +399,6 @@ header {
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: 0% 0%;
-  height: 540px;
 }
 
 button {
@@ -413,28 +412,29 @@ button.orange {
   background-color: #ffad1d;
 }
 button.orange-alpha {
-  background-color: rgba(255, 173, 29, 0.9);
+  background-color: rgba(255, 173, 29, 0.8);
 }
 button.blue {
   background-color: #1cbbb4;
 }
 button.blue-alpha {
-  background-color: rgba(28, 187, 180, 0.9);
+  background-color: rgba(28, 187, 180, 0.8);
 }
 
 .navbar {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 32px 10%;
-  margin-bottom: 36px;
+  flex-wrap: wrap;
+  padding: 24px 6px 32% 6px;
   color: #fff;
-  background: linear-gradient(to bottom, #505050, rgba(0, 0, 0, 0));
+  background: linear-gradient(to bottom, rgba(60, 60, 60, 0.9), rgba(0, 0, 0, 0));
 }
 .navbar h1 {
   flex: 4;
   font-weight: normal;
   font-size: x-large;
+  min-width: 100px;
 }
 .navbar .navigation {
   flex: 6;
@@ -443,67 +443,218 @@ button.blue-alpha {
   justify-content: space-around;
   list-style-type: none;
   font-size: small;
+  min-width: 314px;
+  max-width: 500px;
+  visibility: hidden;
 }
 .navbar .navigation .icon-search {
   display: inline-block;
   font-size: medium;
   padding-top: 4px;
 }
+@media screen and (min-width: 767px) {
+  .navbar .navigation {
+    visibility: visible;
+  }
+}
+@media screen and (min-width: 767px) {
+  .navbar {
+    padding: 32px 8% 48px 8%;
+  }
+}
 
-.header-card {
-  margin-left: 10%;
-  width: 360px;
+.hamburguer {
+  width: 16px;
+  height: 16px;
+  display: block;
+  position: relative;
+  background: none;
+  margin: auto 12px;
+}
+.hamburguer:after, .hamburguer:before,
+.hamburguer span,
+.hamburguer label {
+  content: " ";
+  display: block;
+  width: 100%;
+  height: 3.2px;
+  background: #fff;
+  left: 0;
+  position: absolute;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.hamburguer:before {
+  top: 0;
+}
+.hamburguer:after {
+  bottom: 0;
+}
+.hamburguer:focus {
+  outline: none;
+}
+.hamburguer label {
+  width: 100%;
+  height: 100%;
+  background: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+.hamburguer span {
+  top: 6.4px;
+}
+@media screen and (min-width: 767px) {
+  .hamburguer {
+    display: none;
+  }
+}
+
+#change-hamburguer {
+  display: none;
+}
+#change-hamburguer:checked ~ .hamburguer:before, #change-hamburguer:checked ~ .hamburguer:after {
+  top: 8px;
+  margin-top: -10%;
+}
+#change-hamburguer:checked ~ .hamburguer:before {
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+#change-hamburguer:checked ~ .hamburguer:after {
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+#change-hamburguer:checked ~ .hamburguer span {
+  opacity: 0;
+}
+#change-hamburguer:checked ~ .navigation {
+  visibility: visible;
+  border-top: 1px solid #fff;
+  padding-top: 6px;
+  background: linear-gradient(to bottom, rgba(70, 70, 70, 0.3), rgba(0, 0, 0, 0));
+}
+
+.header-voting-card {
+  width: 100%;
   color: #fff;
 }
-.header-card .content {
+.header-voting-card .content {
   padding: 24px 48px 0 24px;
-  background-color: rgba(80, 80, 80, 0.527);
+  background-color: rgba(70, 70, 70, 0.527);
 }
-.header-card .content h5,
-.header-card .content p {
+.header-voting-card .content h5,
+.header-voting-card .content p {
   font-weight: 200;
   color: #ebebeb;
 }
-.header-card .content h5 {
+.header-voting-card .content h5 {
   font-size: small;
 }
-.header-card .content h2 {
+.header-voting-card .content h2 {
   font-size: 42px;
   font-weight: normal;
 }
-.header-card .content .more-info {
+.header-voting-card .content .more-info {
   display: flex;
   align-items: center;
   font-size: x-small;
   text-decoration: underline;
   font-weight: lighter;
 }
-.header-card .content .more-info span {
+.header-voting-card .content .more-info span {
   padding-top: 4px;
   padding-right: 2px;
   font-size: 14px;
 }
-.header-card .content p {
+.header-voting-card .content p {
   font-size: medium;
 }
-.header-card .content h3 {
+.header-voting-card .content h3 {
   font-size: small;
   padding: 24px 0;
 }
-.header-card .thumb-btns {
+.header-voting-card .thumb-btns {
   display: flex;
 }
-.header-card .thumb-btns button {
+.header-voting-card .thumb-btns button {
   padding: 14px 0;
   font-size: 28px;
 }
+@media screen and (min-width: 767px) {
+  .header-voting-card {
+    margin-left: 8%;
+    width: 360px;
+    margin-bottom: 10px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .header-voting-card {
+    margin-bottom: 26px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .header-voting-card {
+    margin-top: 8%;
+    margin-bottom: 8%;
+  }
+}
 
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-  .header-card > .content {
+  .header-voting-card > .content {
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
-    background-color: rgba(80, 80, 80, 0.5);
+    background-color: rgba(70, 70, 70, 0.5);
   }
+}
+.closing-in-banner {
+  width: 100%;
+  display: flex;
+  height: 38px;
+}
+.closing-in-banner .left-wrapper {
+  flex: 29;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgba(70, 70, 70, 0.3);
+  color: #fff;
+}
+.closing-in-banner .left-wrapper span {
+  text-transform: uppercase;
+  font-size: x-small;
+}
+.closing-in-banner .left-wrapper .icon-right-arrow {
+  color: rgba(70, 70, 70, 0.3);
+  font-size: 12px;
+  transform: translate(87.6%);
+  z-index: 2;
+}
+.closing-in-banner .separator {
+  flex: 2;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+@media screen and (min-width: 992px) {
+  .closing-in-banner .separator {
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.6), transparent);
+  }
+}
+.closing-in-banner .days-remaining {
+  flex: 69;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #464646;
+  padding-bottom: 2px;
+}
+.closing-in-banner .days-remaining span {
+  font-size: x-large;
+}
+.closing-in-banner .days-remaining span:not(.counter) {
+  font-weight: lighter;
+  margin-left: 6px;
 }
 
 /*# sourceMappingURL=main.css.map */
