@@ -1,6 +1,5 @@
-'use strict';
-
 import PropTypes from 'prop-types';
+import { THUMB_UP, THUMB_DOWN } from '../utils/constants.js';
 
 function VotingCard({
   url,
@@ -11,7 +10,7 @@ function VotingCard({
   score,
   saveNewVote,
 }) {
-  const [vote, setVote] = React.useState(1);
+  const [vote, setVote] = React.useState(THUMB_UP);
   const [isVoted, setIsVoted] = React.useState(false);
 
   const firstName = name.split(' ')[0];
@@ -34,12 +33,12 @@ function VotingCard({
 
   return (
     <div className="voting-card">
-      <img src={url}></img>
+      <img src={url} alt={name} />
       <div className="card-container">
         <div className="card-content">
           <div className="thumb-decorator">
             <div className={thumbDecoratorColor}>
-              <span className={thumbDecoratorIcon}></span>
+              <span className={thumbDecoratorIcon} />
             </div>
           </div>
           <div className="right-container">
@@ -47,7 +46,9 @@ function VotingCard({
             <div className="card-details">
               <span className="date">{date}</span>
               <span className="category">
-                {` in`} {category}
+                {' in'}
+                {' '}
+                {category}
               </span>
             </div>
             <p className="card-description">
@@ -56,32 +57,32 @@ function VotingCard({
             <form className="card-vote-form" onSubmit={handleSubmit}>
               {!isVoted && (
                 <>
-                  <input
-                    type="radio"
-                    id={`${firstName}-radio-thumb-up`}
-                    className="radio-button"
-                    name="vote"
-                    vote="up"
-                    onChange={() => setVote(1)}
-                    checked={vote === 1}
-                  />
                   <label
                     htmlFor={`${firstName}-radio-thumb-up`}
-                    className="radio-button-label thumb-up"
-                  />
-                  <input
-                    type="radio"
-                    id={`${firstName}-radio-thumb-down`}
-                    className="radio-button"
-                    name="vote"
-                    vote="down"
-                    onChange={() => setVote(-1)}
-                    checked={vote === -1}
-                  />
+                    className={`radio-button thumb-up ${vote === THUMB_UP ? 'checked' : ''}`}
+                  >
+                    <input
+                      type="radio"
+                      id={`${firstName}-radio-thumb-up`}
+                      name="vote"
+                      vote="up"
+                      onChange={() => setVote(THUMB_UP)}
+                      checked={vote === THUMB_UP}
+                    />
+                  </label>
                   <label
                     htmlFor={`${firstName}-radio-thumb-down`}
-                    className="radio-button-label thumb-down"
-                  />
+                    className={`radio-button thumb-down ${vote === THUMB_DOWN ? 'checked' : ''}`}
+                  >
+                    <input
+                      type="radio"
+                      id={`${firstName}-radio-thumb-down`}
+                      name="vote"
+                      vote="down"
+                      onChange={() => setVote(THUMB_DOWN)}
+                      checked={vote === THUMB_DOWN}
+                    />
+                  </label>
                 </>
               )}
               <input
@@ -93,12 +94,18 @@ function VotingCard({
         </div>
         <div className="card-statistics">
           <div className="blue-alpha" style={{ flex: thumbsUp }}>
-            <span className="icon-thumb-up"></span>
-            <span className="score">{thumbsUp.toFixed(0)}%</span>
+            <span className="icon-thumb-up" />
+            <span className="score">
+              {thumbsUp.toFixed(0)}
+              %
+            </span>
           </div>
           <div className="orange-alpha" style={{ flex: thumbsDown }}>
-            <span className="score">{thumbsDown.toFixed(0)}%</span>
-            <span className="icon-thumb-down"></span>
+            <span className="score">
+              {thumbsDown.toFixed(0)}
+              %
+            </span>
+            <span className="icon-thumb-down" />
           </div>
         </div>
       </div>

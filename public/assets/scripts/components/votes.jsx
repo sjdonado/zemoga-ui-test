@@ -1,11 +1,10 @@
-'use strict';
-
+import { THUMB_UP, THUMB_DOWN } from '../utils/constants.js';
 import {
   initDB,
   runSeed,
   getAllPublicFigures,
   udpatePublicFigureScore,
-} from '../services/database';
+} from '../services/database.js';
 
 import VotingCard from './votingCard.jsx';
 
@@ -36,18 +35,17 @@ function Votes() {
   }, [fetchData]);
 
   const saveNewVote = (id, vote) => {
-    const obj = data.find((obj) => obj.id === id);
-    if (vote !== 1 && vote !== -1) {
+    const record = data.find((obj) => obj.id === id);
+    if (vote !== THUMB_UP && vote !== THUMB_DOWN) {
       return;
     }
-    const scoreName = vote === 1 ? 'thumbsUp' : 'thumbsDown';
-    const value = obj.score[scoreName] + 1;
+    const value = record.score[vote] + 1;
 
-    udpatePublicFigureScore(window.db, id, scoreName, value, (err, res) => {
+    udpatePublicFigureScore(window.db, id, vote, value, (err, res) => {
       if (err || !res) {
         return;
       }
-      Object.assign(obj.score, { [scoreName]: value });
+      Object.assign(record.score, { [vote]: value });
       setData([...data]);
     });
   };
@@ -61,7 +59,9 @@ function Votes() {
         ) : (
           <>
             {data.map(
-              ({ id, url, name, date, category, description, score }) => (
+              ({
+                id, url, name, date, category, description, score,
+              }) => (
                 <VotingCard
                   key={id}
                   url={url}
@@ -72,7 +72,7 @@ function Votes() {
                   score={score}
                   saveNewVote={(vote) => saveNewVote(id, vote)}
                 />
-              )
+              ),
             )}
           </>
         )}
@@ -81,7 +81,7 @@ function Votes() {
   );
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   const e = React.createElement;
   ReactDOM.render(e(Votes), document.querySelector('#votes'));
 });

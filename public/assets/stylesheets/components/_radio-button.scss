@@ -1,10 +1,21 @@
-.radio-button {
-  opacity: 0;
-  position: absolute;
+.radio-button, .radio-button > input[type="radio"] {
+  cursor: pointer;
+  margin: 2px;
 }
 
-.radio-button-label:before {
-  display: inline-block;
+.radio-button > input[type="radio"] {
+  display: none;
+  position: absolute;
+  margin: 0;
+}
+
+.radio-button::before {
+  display: table-cell;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  width: 24px;
+  height: 24px;
   font-family: "Glyphter";
   font-style: normal;
   font-weight: normal;
@@ -13,36 +24,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.radio-button,
-.radio-button-label {
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: middle;
-  margin: 2px;
+.checked {
+  border: 1px solid $white;
 }
 
-.radio-button + .radio-button-label:before {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  width: 24px;
-  height: 24px;
-}
-
-.thumb-up:before {
+.thumb-up::before {
   content: "\0045";
   background: $blue;
   border: 1px solid $blue;
   @include font-format("sm");
 }
 
-.thumb-down:before {
+.thumb-down::before {
   content: "\0046";
   background: $orange;
   border: 1px solid $orange;
   @include font-format("sm");
-}
-
-.radio-button:checked + .radio-button-label:before {
-  border: 1px solid $white;
 }

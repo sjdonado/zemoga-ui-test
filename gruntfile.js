@@ -4,28 +4,6 @@ const sass = require('node-sass');
 
 module.exports = (grunt) => {
   grunt.initConfig({
-    browserify: {
-      dist: {
-        options: {
-          transform: [
-            [
-              'babelify',
-              {
-                sourceMap: true,
-                presets: ['@babel/preset-env', '@babel/preset-react'],
-                plugins: ['@babel/plugin-transform-modules-commonjs'],
-              },
-            ],
-          ],
-        },
-        files: {
-          'public/assets/scripts/bundle.js': [
-            'public/assets/scripts/**/*.jsx',
-            'public/assets/scripts/services/*.js',
-          ],
-        },
-      },
-    },
     sass: {
       dev: {
         options: {
@@ -45,6 +23,32 @@ module.exports = (grunt) => {
         files: {
           'dist/assets/stylesheets/main.min.css':
             'public/assets/stylesheets/main.scss',
+        },
+      },
+    },
+    eslint: {
+      target: ['public/**/*.jsx'],
+    },
+    browserify: {
+      dist: {
+        options: {
+          transform: [
+            [
+              'babelify',
+              {
+                sourceMap: true,
+                presets: ['@babel/preset-env', '@babel/preset-react'],
+                plugins: ['@babel/plugin-transform-modules-commonjs'],
+              },
+            ],
+          ],
+        },
+        files: {
+          'public/assets/scripts/bundle.js': [
+            'public/assets/scripts/**/*.jsx',
+            'public/assets/scripts/services/*.js',
+            'public/assets/scripts/utils/*.js',
+          ],
         },
       },
     },
@@ -121,17 +125,18 @@ module.exports = (grunt) => {
         files: ['public/index.html'],
       },
       js: {
-        files: '**/*.jsx',
-        tasks: ['browserify'],
+        files: ['public/assets/scripts/**/*.jsx', 'public/assets/scripts/**/*.js'],
+        tasks: ['eslint', 'browserify'],
       },
       css: {
         files: '**/*.scss',
-        tasks: ['sass'],
+        tasks: ['sass:dev'],
       },
     },
   });
 
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -140,13 +145,23 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['sass:dev', 'browserify', 'connect', 'watch']);
+  grunt.registerTask('default', [
+    'sass:dev',
+    'eslint',
+    'browserify',
+    'connect',
+    'watch',
+  ]);
   grunt.registerTask('production', [
     'clean',
     'sass:prod',
+    'eslint',
     'browserify',
     'uglify',
     'copy',
     'string-replace',
+  ]);
+  grunt.registerTask('lint', [
+    'eslint',
   ]);
 };

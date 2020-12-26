@@ -1294,9 +1294,11 @@ if (process.env.NODE_ENV === 'production') {
 
 }).call(this)}).call(this,require('_process'))
 },{"./cjs/react-is.development.js":8,"./cjs/react-is.production.min.js":9,"_process":2}],11:[function(require,module,exports){
-'use strict';
+"use strict";
 
-var _database = require("../services/database");
+var _constants = require("../utils/constants.js");
+
+var _database = require("../services/database.js");
 
 var _votingCard = _interopRequireDefault(require("./votingCard.jsx"));
 
@@ -1365,22 +1367,21 @@ function Votes() {
   }, [fetchData]);
 
   var _saveNewVote = function saveNewVote(id, vote) {
-    var obj = data.find(function (obj) {
+    var record = data.find(function (obj) {
       return obj.id === id;
     });
 
-    if (vote !== 1 && vote !== -1) {
+    if (vote !== _constants.THUMB_UP && vote !== _constants.THUMB_DOWN) {
       return;
     }
 
-    var scoreName = vote === 1 ? 'thumbsUp' : 'thumbsDown';
-    var value = obj.score[scoreName] + 1;
-    (0, _database.udpatePublicFigureScore)(window.db, id, scoreName, value, function (err, res) {
+    var value = record.score[vote] + 1;
+    (0, _database.udpatePublicFigureScore)(window.db, id, vote, value, function (err, res) {
       if (err || !res) {
         return;
       }
 
-      Object.assign(obj.score, _defineProperty({}, scoreName, value));
+      Object.assign(record.score, _defineProperty({}, vote, value));
       setData(_toConsumableArray(data));
     });
   };
@@ -1415,8 +1416,8 @@ document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(e(Votes), document.querySelector('#votes'));
 });
 
-},{"../services/database":13,"./votingCard.jsx":12}],12:[function(require,module,exports){
-'use strict';
+},{"../services/database.js":13,"../utils/constants.js":14,"./votingCard.jsx":12}],12:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1424,6 +1425,8 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _constants = require("../utils/constants.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -1448,7 +1451,7 @@ function VotingCard(_ref) {
       score = _ref.score,
       saveNewVote = _ref.saveNewVote;
 
-  var _React$useState = React.useState(1),
+  var _React$useState = React.useState(_constants.THUMB_UP),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       vote = _React$useState2[0],
       setVote = _React$useState2[1];
@@ -1479,7 +1482,8 @@ function VotingCard(_ref) {
   return /*#__PURE__*/React.createElement("div", {
     className: "voting-card"
   }, /*#__PURE__*/React.createElement("img", {
-    src: url
+    src: url,
+    alt: name
   }), /*#__PURE__*/React.createElement("div", {
     className: "card-container"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1498,38 +1502,36 @@ function VotingCard(_ref) {
     className: "date"
   }, date), /*#__PURE__*/React.createElement("span", {
     className: "category"
-  }, " in", " ", category)), /*#__PURE__*/React.createElement("p", {
+  }, ' in', ' ', category)), /*#__PURE__*/React.createElement("p", {
     className: "card-description"
   }, isVoted ? 'Thank you for voting!' : description), /*#__PURE__*/React.createElement("form", {
     className: "card-vote-form",
     onSubmit: handleSubmit
-  }, !isVoted && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("input", {
+  }, !isVoted && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "".concat(firstName, "-radio-thumb-up"),
+    className: "radio-button thumb-up ".concat(vote === _constants.THUMB_UP ? 'checked' : '')
+  }, /*#__PURE__*/React.createElement("input", {
     type: "radio",
     id: "".concat(firstName, "-radio-thumb-up"),
-    className: "radio-button",
     name: "vote",
     vote: "up",
     onChange: function onChange() {
-      return setVote(1);
+      return setVote(_constants.THUMB_UP);
     },
-    checked: vote === 1
-  }), /*#__PURE__*/React.createElement("label", {
-    htmlFor: "".concat(firstName, "-radio-thumb-up"),
-    className: "radio-button-label thumb-up"
-  }), /*#__PURE__*/React.createElement("input", {
+    checked: vote === _constants.THUMB_UP
+  })), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "".concat(firstName, "-radio-thumb-down"),
+    className: "radio-button thumb-down ".concat(vote === _constants.THUMB_DOWN ? 'checked' : '')
+  }, /*#__PURE__*/React.createElement("input", {
     type: "radio",
     id: "".concat(firstName, "-radio-thumb-down"),
-    className: "radio-button",
     name: "vote",
     vote: "down",
     onChange: function onChange() {
-      return setVote(-1);
+      return setVote(_constants.THUMB_DOWN);
     },
-    checked: vote === -1
-  }), /*#__PURE__*/React.createElement("label", {
-    htmlFor: "".concat(firstName, "-radio-thumb-down"),
-    className: "radio-button-label thumb-down"
-  })), /*#__PURE__*/React.createElement("input", {
+    checked: vote === _constants.THUMB_DOWN
+  }))), /*#__PURE__*/React.createElement("input", {
     type: "submit",
     value: isVoted ? 'Vote again' : 'Vote Now'
   })))), /*#__PURE__*/React.createElement("div", {
@@ -1570,13 +1572,15 @@ VotingCard.propTypes = {
 var _default = VotingCard;
 exports["default"] = _default;
 
-},{"prop-types":6}],13:[function(require,module,exports){
-'use strict';
+},{"../utils/constants.js":14,"prop-types":6}],13:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.initDB = exports.udpatePublicFigureScore = exports.getAllPublicFigures = exports.runSeed = void 0;
+
+var _constants = require("../utils/constants.js");
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -1584,14 +1588,159 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 var databaseName = 'ruleOfThumb';
 var objectStoreName = 'publicFigures';
+/**
+ * Dummy data seed
+ * @param {IDBDatabase} db
+ * @param {Function} callback
+ */
+
+var runSeed = function runSeed(db, callback) {
+  var tx = db.transaction([objectStoreName], 'readwrite');
+  var store = tx.objectStore(objectStoreName);
+
+  for (var i = 0; i < _constants.DB_SEED.length; i += 1) {
+    store.add(_objectSpread(_objectSpread({}, _constants.DB_SEED[i]), {}, {
+      timestamp: Date.now()
+    }));
+  }
+
+  tx.oncomplete = function () {
+    console.log('[indexedDB]: seed ran');
+    callback(null, true);
+  };
+
+  tx.onerror = function (_ref) {
+    var target = _ref.target;
+    console.error("[indexedDB]: error running seed ".concat(target.errorCode));
+    callback(target.errorCode);
+  };
+};
+/**
+ * Get all public figures
+ * @param {IDBDatabase} db
+ * @param {Function} callback
+ */
+
+
+exports.runSeed = runSeed;
+
+var getAllPublicFigures = function getAllPublicFigures(db, callback) {
+  var tx = db.transaction([objectStoreName], 'readonly');
+  var store = tx.objectStore(objectStoreName);
+  var req = store.openCursor();
+  var publicFigures = [];
+
+  req.onsuccess = function (event) {
+    var cursor = event.target.result;
+
+    if (cursor != null) {
+      publicFigures.push(cursor.value);
+      cursor["continue"]();
+    } else {
+      callback(null, publicFigures);
+    }
+  };
+
+  req.onerror = function (_ref2) {
+    var target = _ref2.target;
+    console.error("[indexedDB]: error in cursor request".concat(target.errorCode));
+    callback(target.errorCode);
+  };
+};
+/**
+ * Update public figure score
+ * @param {IDBDatabase} db
+ * @param {Number} id - Record id
+ * @param {String} scoreName
+ * @param {Number} value
+ * @param {Function} callback
+ */
+
+
+exports.getAllPublicFigures = getAllPublicFigures;
+
+var udpatePublicFigureScore = function udpatePublicFigureScore(db, id, scoreName, value, callback) {
+  var tx = db.transaction([objectStoreName], 'readwrite');
+  var store = tx.objectStore(objectStoreName);
+  var req = store.openCursor();
+
+  req.onsuccess = function (event) {
+    var cursor = event.target.result;
+
+    if (cursor != null) {
+      if (cursor.value.id === id) {
+        var updateData = cursor.value;
+        updateData.score[scoreName] = value;
+        var updateReq = cursor.update(updateData);
+
+        updateReq.onsuccess = function () {
+          callback(null, true);
+        };
+
+        updateReq.onerror = function (_ref3) {
+          var target = _ref3.target;
+          console.error("[indexedDB]: error in cursor update".concat(target.errorCode));
+          callback(target.errorCode);
+        };
+      }
+
+      cursor["continue"]();
+    } else {
+      callback(null, false);
+    }
+  };
+
+  req.onerror = function (_ref4) {
+    var target = _ref4.target;
+    console.error("[indexedDB]: error in cursor request".concat(target.errorCode));
+    callback(target.errorCode);
+  };
+};
+/**
+ * Init database
+ * @param {Function} callback
+ */
+
+
+exports.udpatePublicFigureScore = udpatePublicFigureScore;
+
+var initDB = function initDB(callback) {
+  var dbReq = indexedDB.open(databaseName, 1);
+
+  dbReq.onupgradeneeded = function (event) {
+    var db = event.target.result;
+    db.createObjectStore(objectStoreName, {
+      keyPath: 'id',
+      autoIncrement: true
+    });
+  };
+
+  dbReq.onsuccess = function (event) {
+    window.db = event.target.result;
+    if (callback) callback();
+  };
+
+  dbReq.onerror = function (_ref5) {
+    var target = _ref5.target;
+    console.error("[indexedDB]: error in cursor request".concat(target.errorCode));
+  };
+};
+
+exports.initDB = initDB;
+
+},{"../utils/constants.js":14}],14:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DB_SEED = exports.THUMB_UP = exports.THUMB_DOWN = void 0;
+var THUMB_DOWN = 'thumbsDown';
+exports.THUMB_DOWN = THUMB_DOWN;
+var THUMB_UP = 'thumbsUp';
+exports.THUMB_UP = THUMB_UP;
 var DB_SEED = [{
   url: 'assets/images/kanye.jpg',
   name: 'Kanye West',
@@ -1633,154 +1782,6 @@ var DB_SEED = [{
     thumbsDown: 36
   }
 }];
-/**
- * Dummy data seed
- * @param {IDBDatabase} db
- * @param {Function} callback
- */
+exports.DB_SEED = DB_SEED;
 
-var runSeed = function runSeed(db, callback) {
-  var tx = db.transaction([objectStoreName], 'readwrite');
-  var store = tx.objectStore(objectStoreName);
-
-  var _iterator = _createForOfIteratorHelper(DB_SEED),
-      _step;
-
-  try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var data = _step.value;
-      store.add(_objectSpread(_objectSpread({}, data), {}, {
-        timestamp: Date.now()
-      }));
-    }
-  } catch (err) {
-    _iterator.e(err);
-  } finally {
-    _iterator.f();
-  }
-
-  tx.oncomplete = function () {
-    console.log('[indexedDB]: seed ran');
-    callback(null, true);
-  };
-
-  tx.onerror = function (_ref) {
-    var target = _ref.target;
-    console.error('[indexedDB]: error running seed ' + target.errorCode);
-    callback(target.errorCode);
-  };
-};
-/**
- * Get all public figures
- * @param {IDBDatabase} db
- * @param {Function} callback
- */
-
-
-exports.runSeed = runSeed;
-
-var getAllPublicFigures = function getAllPublicFigures(db, callback) {
-  var tx = db.transaction([objectStoreName], 'readonly');
-  var store = tx.objectStore(objectStoreName);
-  var req = store.openCursor();
-  var publicFigures = [];
-
-  req.onsuccess = function (event) {
-    var cursor = event.target.result;
-
-    if (cursor != null) {
-      publicFigures.push(cursor.value);
-      cursor["continue"]();
-    } else {
-      callback(null, publicFigures);
-    }
-  };
-
-  req.onerror = function (_ref2) {
-    var target = _ref2.target;
-    console.error('[indexedDB]: error in cursor request' + target.errorCode);
-    callback(target.errorCode);
-  };
-};
-/**
- * Update public figure score
- * @param {IDBDatabase} db
- * @param {Number} id - Record id
- * @param {String} scoreName
- * @param {Number} value
- * @param {Function} callback
- */
-
-
-exports.getAllPublicFigures = getAllPublicFigures;
-
-var udpatePublicFigureScore = function udpatePublicFigureScore(db, id, scoreName, value, callback) {
-  var tx = db.transaction([objectStoreName], 'readwrite');
-  var store = tx.objectStore(objectStoreName);
-  var req = store.openCursor();
-
-  req.onsuccess = function (event) {
-    var cursor = event.target.result;
-
-    if (cursor != null) {
-      if (cursor.value.id === id) {
-        var updateData = cursor.value;
-        updateData.score[scoreName] = value;
-        var updateReq = cursor.update(updateData);
-
-        updateReq.onsuccess = function () {
-          callback(null, true);
-        };
-
-        updateReq.onerror = function (_ref3) {
-          var target = _ref3.target;
-          console.error('[indexedDB]: error in cursor update' + target.errorCode);
-          callback(target.errorCode);
-        };
-      }
-
-      cursor["continue"]();
-    } else {
-      callback(null, false);
-    }
-  };
-
-  req.onerror = function (_ref4) {
-    var target = _ref4.target;
-    console.error('[indexedDB]: error in cursor request' + target.errorCode);
-    callback(target.errorCode);
-  };
-};
-/**
- * Init database
- * @param {Function} callback
- */
-
-
-exports.udpatePublicFigureScore = udpatePublicFigureScore;
-
-var initDB = function initDB(callback) {
-  var dbReq = indexedDB.open(databaseName, 1);
-
-  dbReq.onupgradeneeded = function (event) {
-    var db = event.target.result;
-    db.createObjectStore(objectStoreName, {
-      keyPath: 'id',
-      autoIncrement: true
-    });
-  };
-
-  dbReq.onsuccess = function (event) {
-    window.db = event.target.result;
-    if (callback) callback();
-  };
-
-  dbReq.onerror = function (_ref5) {
-    var target = _ref5.target;
-    console.error('[indexedDB]: error in cursor request' + target.errorCode);
-  };
-};
-
-exports.initDB = initDB;
-
-},{}]},{},[11,12,13]);
+},{}]},{},[11,12,13,14]);

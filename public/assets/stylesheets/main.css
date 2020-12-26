@@ -507,13 +507,24 @@ button {
   width: 100%;
 }
 
-.radio-button {
-  opacity: 0;
-  position: absolute;
+.radio-button, .radio-button > input[type=radio] {
+  cursor: pointer;
+  margin: 2px;
 }
 
-.radio-button-label:before {
-  display: inline-block;
+.radio-button > input[type=radio] {
+  display: none;
+  position: absolute;
+  margin: 0;
+}
+
+.radio-button::before {
+  display: table-cell;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  width: 24px;
+  height: 24px;
   font-family: "Glyphter";
   font-style: normal;
   font-weight: normal;
@@ -522,23 +533,11 @@ button {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.radio-button,
-.radio-button-label {
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: middle;
-  margin: 2px;
+.checked {
+  border: 1px solid #fff;
 }
 
-.radio-button + .radio-button-label:before {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  width: 24px;
-  height: 24px;
-}
-
-.thumb-up:before {
+.thumb-up::before {
   content: "E";
   background: #1cbbb4;
   border: 1px solid #1cbbb4;
@@ -546,16 +545,12 @@ button {
   line-height: 1.25rem;
 }
 
-.thumb-down:before {
+.thumb-down::before {
   content: "F";
   background: #ffad1d;
   border: 1px solid #ffad1d;
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-
-.radio-button:checked + .radio-button-label:before {
-  border: 1px solid #fff;
 }
 
 .navbar {
