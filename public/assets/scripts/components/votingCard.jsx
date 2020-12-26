@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 function VotingCard({
   url,
@@ -14,15 +14,15 @@ function VotingCard({
   const [vote, setVote] = React.useState(1);
   const [isVoted, setIsVoted] = React.useState(false);
 
-  const firstName = name.split(" ")[0];
+  const firstName = name.split(' ')[0];
 
   const total = score.thumbsUp + score.thumbsDown;
   const thumbsUp = (score.thumbsUp * 100) / total;
   const thumbsDown = (score.thumbsDown * 100) / total;
 
   const result = thumbsUp > thumbsDown;
-  const thumbDecoratorColor = result ? "blue" : "orange";
-  const thumbDecoratorIcon = result ? "icon-thumb-up" : "icon-thumb-down";
+  const thumbDecoratorColor = result ? 'blue' : 'orange';
+  const thumbDecoratorIcon = result ? 'icon-thumb-up' : 'icon-thumb-down';
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ function VotingCard({
               </span>
             </div>
             <p className="card-description">
-              {isVoted ? "Thank you for voting!" : description}
+              {isVoted ? 'Thank you for voting!' : description}
             </p>
             <form className="card-vote-form" onSubmit={handleSubmit}>
               {!isVoted && (
@@ -86,7 +86,7 @@ function VotingCard({
               )}
               <input
                 type="submit"
-                value={isVoted ? "Vote again" : "Vote Now"}
+                value={isVoted ? 'Vote again' : 'Vote Now'}
               />
             </form>
           </div>

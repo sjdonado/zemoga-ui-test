@@ -1294,7 +1294,7 @@ if (process.env.NODE_ENV === 'production') {
 
 }).call(this)}).call(this,require('_process'))
 },{"./cjs/react-is.development.js":8,"./cjs/react-is.production.min.js":9,"_process":2}],11:[function(require,module,exports){
-"use strict";
+'use strict';
 
 var _votingCard = _interopRequireDefault(require("./votingCard.jsx"));
 
@@ -1308,6 +1308,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1320,78 +1322,50 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var dummyData = [{
-  id: 1,
-  url: "assets/images/kanye.jpg",
-  name: "Kanye West",
-  date: "1 month ago",
-  category: "Entertainment",
-  description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n    Voluptate, suscipit.",
-  score: {
-    thumbsUp: 64,
-    thumbsDown: 36
-  }
-}, {
-  id: 2,
-  url: "assets/images/mark.jpg",
-  name: "Mark Zuckerberg",
-  date: "1 month ago",
-  category: "Business",
-  description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit",
-  score: {
-    thumbsUp: 36,
-    thumbsDown: 64
-  }
-}, {
-  id: 3,
-  url: "assets/images/cristina.jpg",
-  name: "Cristina Fernández de Kirchner",
-  date: "1 month ago",
-  category: "Politics",
-  description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n    Voluptate, suscipit.",
-  score: {
-    thumbsUp: 36,
-    thumbsDown: 64
-  }
-}, {
-  id: 4,
-  url: "assets/images/malala.jpg",
-  name: "Malala Yousafzai",
-  date: "1 month ago",
-  category: "Entertainment",
-  description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit",
-  score: {
-    thumbsUp: 64,
-    thumbsDown: 36
-  }
-}];
-
 function Votes() {
-  var _React$useState = React.useState(dummyData),
+  var _React$useState = React.useState([]),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       data = _React$useState2[0],
       setData = _React$useState2[1];
+
+  React.useEffect(function () {
+    if (!window.db) {
+      initDB(function () {
+        return location.reload();
+      });
+      return;
+    }
+
+    getAllPublicFigures(window.db, function (err, res) {
+      if (err) {
+        return;
+      }
+
+      if (res.length === 0) {
+        runSeed(window.db, function () {
+          return location.reload();
+        });
+      } else {
+        setData(res);
+      }
+    });
+  }, []);
 
   var _saveNewVote = function saveNewVote(id, vote) {
     var obj = data.find(function (obj) {
       return obj.id === id;
     });
-    var newScore = {};
 
-    if (vote === 1) {
-      newScore = {
-        thumbsUp: obj.score.thumbsUp + 1
-      };
+    if (vote !== 1 && vote !== -1) {
+      return;
     }
 
-    if (vote === -1) {
-      newScore = {
-        thumbsDown: obj.score.thumbsDown + 1
-      };
-    }
-
-    Object.assign(obj.score, newScore);
-    setData(_toConsumableArray(data));
+    var scoreName = vote === 1 ? 'thumbsUp' : 'thumbsDown';
+    var value = obj.score[scoreName] + 1;
+    udpatePublicFigureScore(window.db, id, scoreName, value, function () {
+      Object.assign(obj.score, _defineProperty({}, scoreName, value));
+      setData(_toConsumableArray(data));
+    });
   };
 
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "Votes"), /*#__PURE__*/React.createElement("div", {
@@ -1419,13 +1393,13 @@ function Votes() {
   })));
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   var e = React.createElement;
-  ReactDOM.render(e(Votes), document.querySelector("#votes"));
+  ReactDOM.render(e(Votes), document.querySelector('#votes'));
 });
 
 },{"./votingCard.jsx":12}],12:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1467,13 +1441,13 @@ function VotingCard(_ref) {
       isVoted = _React$useState4[0],
       setIsVoted = _React$useState4[1];
 
-  var firstName = name.split(" ")[0];
+  var firstName = name.split(' ')[0];
   var total = score.thumbsUp + score.thumbsDown;
   var thumbsUp = score.thumbsUp * 100 / total;
   var thumbsDown = score.thumbsDown * 100 / total;
   var result = thumbsUp > thumbsDown;
-  var thumbDecoratorColor = result ? "blue" : "orange";
-  var thumbDecoratorIcon = result ? "icon-thumb-up" : "icon-thumb-down";
+  var thumbDecoratorColor = result ? 'blue' : 'orange';
+  var thumbDecoratorIcon = result ? 'icon-thumb-up' : 'icon-thumb-down';
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
@@ -1509,7 +1483,7 @@ function VotingCard(_ref) {
     className: "category"
   }, " in", " ", category)), /*#__PURE__*/React.createElement("p", {
     className: "card-description"
-  }, isVoted ? "Thank you for voting!" : description), /*#__PURE__*/React.createElement("form", {
+  }, isVoted ? 'Thank you for voting!' : description), /*#__PURE__*/React.createElement("form", {
     className: "card-vote-form",
     onSubmit: handleSubmit
   }, !isVoted && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("input", {
@@ -1540,7 +1514,7 @@ function VotingCard(_ref) {
     className: "radio-button-label thumb-down"
   })), /*#__PURE__*/React.createElement("input", {
     type: "submit",
-    value: isVoted ? "Vote again" : "Vote Now"
+    value: isVoted ? 'Vote again' : 'Vote Now'
   })))), /*#__PURE__*/React.createElement("div", {
     className: "card-statistics"
   }, /*#__PURE__*/React.createElement("div", {

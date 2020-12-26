@@ -1,74 +1,39 @@
-"use strict";
+'use strict';
 
-import VotingCard from "./votingCard.jsx";
-
-const dummyData = [
-  {
-    id: 1,
-    url: "assets/images/kanye.jpg",
-    name: "Kanye West",
-    date: "1 month ago",
-    category: "Entertainment",
-    description: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-    Voluptate, suscipit.`,
-    score: {
-      thumbsUp: 64,
-      thumbsDown: 36,
-    },
-  },
-  {
-    id: 2,
-    url: "assets/images/mark.jpg",
-    name: "Mark Zuckerberg",
-    date: "1 month ago",
-    category: "Business",
-    description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit",
-    score: {
-      thumbsUp: 36,
-      thumbsDown: 64,
-    },
-  },
-  {
-    id: 3,
-    url: "assets/images/cristina.jpg",
-    name: "Cristina Fernández de Kirchner",
-    date: "1 month ago",
-    category: "Politics",
-    description: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-    Voluptate, suscipit.`,
-    score: {
-      thumbsUp: 36,
-      thumbsDown: 64,
-    },
-  },
-  {
-    id: 4,
-    url: "assets/images/malala.jpg",
-    name: "Malala Yousafzai",
-    date: "1 month ago",
-    category: "Entertainment",
-    description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit",
-    score: {
-      thumbsUp: 64,
-      thumbsDown: 36,
-    },
-  },
-];
+import VotingCard from './votingCard.jsx';
 
 function Votes() {
-  const [data, setData] = React.useState(dummyData);
+  const [data, setData] = React.useState([]);
+
+  React.useEffect(() => {
+    if (!window.db) {
+      initDB(() => location.reload());
+      return;
+    }
+    getAllPublicFigures(window.db, (err, res) => {
+      if (err) {
+        return;
+      }
+      if (res.length === 0) {
+        runSeed(window.db, () => location.reload());
+      } else {
+        setData(res);
+      }
+    });
+  }, []);
 
   const saveNewVote = (id, vote) => {
     const obj = data.find((obj) => obj.id === id);
-    let newScore = {};
-    if (vote === 1) {
-      newScore = { thumbsUp: obj.score.thumbsUp + 1 };
+    if (vote !== 1 && vote !== -1) {
+      return;
     }
-    if (vote === -1) {
-      newScore = { thumbsDown: obj.score.thumbsDown + 1 };
-    }
-    Object.assign(obj.score, newScore);
-    setData([...data]);
+    const scoreName = vote === 1 ? 'thumbsUp' : 'thumbsDown';
+    const value = obj.score[scoreName] + 1;
+
+    udpatePublicFigureScore(window.db, id, scoreName, value, () => {
+      Object.assign(obj.score, { [scoreName]: value });
+      setData([...data]);
+    });
   };
 
   return (
@@ -92,7 +57,7 @@ function Votes() {
   );
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   const e = React.createElement;
-  ReactDOM.render(e(Votes), document.querySelector("#votes"));
+  ReactDOM.render(e(Votes), document.querySelector('#votes'));
 });
