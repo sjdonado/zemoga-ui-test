@@ -1296,6 +1296,8 @@ if (process.env.NODE_ENV === 'production') {
 },{"./cjs/react-is.development.js":8,"./cjs/react-is.production.min.js":9,"_process":2}],11:[function(require,module,exports){
 'use strict';
 
+var _database = require("../services/database");
+
 var _votingCard = _interopRequireDefault(require("./votingCard.jsx"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -1333,21 +1335,21 @@ function Votes() {
       isLoading = _React$useState4[0],
       setIsLoading = _React$useState4[1];
 
-  var fetchData = function fetchData(db) {
-    if (!db) {
-      initDB(function (resDB) {
-        return fetchData(resDB);
+  var fetchData = function fetchData() {
+    if (!window.db) {
+      (0, _database.initDB)(function () {
+        return fetchData();
       });
       return;
     }
 
-    getAllPublicFigures(db, function (err, res) {
+    (0, _database.getAllPublicFigures)(window.db, function (err, res) {
       if (err) {
         return;
       }
 
       if (res.length === 0) {
-        runSeed(db, function () {
+        (0, _database.runSeed)(window.db, function () {
           return fetchData();
         });
         return;
@@ -1359,9 +1361,7 @@ function Votes() {
   };
 
   React.useEffect(function () {
-    if (isLoading) {
-      fetchData(window.db);
-    }
+    if (isLoading) fetchData();
   }, [fetchData]);
 
   var _saveNewVote = function saveNewVote(id, vote) {
@@ -1375,7 +1375,7 @@ function Votes() {
 
     var scoreName = vote === 1 ? 'thumbsUp' : 'thumbsDown';
     var value = obj.score[scoreName] + 1;
-    udpatePublicFigureScore(window.db, id, scoreName, value, function (err, res) {
+    (0, _database.udpatePublicFigureScore)(window.db, id, scoreName, value, function (err, res) {
       if (err || !res) {
         return;
       }
@@ -1415,7 +1415,7 @@ document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(e(Votes), document.querySelector('#votes'));
 });
 
-},{"./votingCard.jsx":12}],12:[function(require,module,exports){
+},{"../services/database":13,"./votingCard.jsx":12}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1570,4 +1570,217 @@ VotingCard.propTypes = {
 var _default = VotingCard;
 exports["default"] = _default;
 
-},{"prop-types":6}]},{},[11,12]);
+},{"prop-types":6}],13:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.initDB = exports.udpatePublicFigureScore = exports.getAllPublicFigures = exports.runSeed = void 0;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var databaseName = 'ruleOfThumb';
+var objectStoreName = 'publicFigures';
+var DB_SEED = [{
+  url: 'assets/images/kanye.jpg',
+  name: 'Kanye West',
+  date: '1 month ago',
+  category: 'Entertainment',
+  description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n    Voluptate, suscipit.",
+  score: {
+    thumbsUp: 64,
+    thumbsDown: 36
+  }
+}, {
+  url: 'assets/images/mark.jpg',
+  name: 'Mark Zuckerberg',
+  date: '1 month ago',
+  category: 'Business',
+  description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit',
+  score: {
+    thumbsUp: 36,
+    thumbsDown: 64
+  }
+}, {
+  url: 'assets/images/cristina.jpg',
+  name: 'Cristina Fernández de Kirchner',
+  date: '1 month ago',
+  category: 'Politics',
+  description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n    Voluptate, suscipit.",
+  score: {
+    thumbsUp: 36,
+    thumbsDown: 64
+  }
+}, {
+  url: 'assets/images/malala.jpg',
+  name: 'Malala Yousafzai',
+  date: '1 month ago',
+  category: 'Entertainment',
+  description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit',
+  score: {
+    thumbsUp: 64,
+    thumbsDown: 36
+  }
+}];
+/**
+ * Dummy data seed
+ * @param {IDBDatabase} db
+ * @param {Function} callback
+ */
+
+var runSeed = function runSeed(db, callback) {
+  var tx = db.transaction([objectStoreName], 'readwrite');
+  var store = tx.objectStore(objectStoreName);
+
+  var _iterator = _createForOfIteratorHelper(DB_SEED),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var data = _step.value;
+      store.add(_objectSpread(_objectSpread({}, data), {}, {
+        timestamp: Date.now()
+      }));
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  tx.oncomplete = function () {
+    console.log('[indexedDB]: seed ran');
+    callback(null, true);
+  };
+
+  tx.onerror = function (_ref) {
+    var target = _ref.target;
+    console.error('[indexedDB]: error running seed ' + target.errorCode);
+    callback(target.errorCode);
+  };
+};
+/**
+ * Get all public figures
+ * @param {IDBDatabase} db
+ * @param {Function} callback
+ */
+
+
+exports.runSeed = runSeed;
+
+var getAllPublicFigures = function getAllPublicFigures(db, callback) {
+  var tx = db.transaction([objectStoreName], 'readonly');
+  var store = tx.objectStore(objectStoreName);
+  var req = store.openCursor();
+  var publicFigures = [];
+
+  req.onsuccess = function (event) {
+    var cursor = event.target.result;
+
+    if (cursor != null) {
+      publicFigures.push(cursor.value);
+      cursor["continue"]();
+    } else {
+      callback(null, publicFigures);
+    }
+  };
+
+  req.onerror = function (_ref2) {
+    var target = _ref2.target;
+    console.error('[indexedDB]: error in cursor request' + target.errorCode);
+    callback(target.errorCode);
+  };
+};
+/**
+ * Update public figure score
+ * @param {IDBDatabase} db
+ * @param {Number} id - Record id
+ * @param {String} scoreName
+ * @param {Number} value
+ * @param {Function} callback
+ */
+
+
+exports.getAllPublicFigures = getAllPublicFigures;
+
+var udpatePublicFigureScore = function udpatePublicFigureScore(db, id, scoreName, value, callback) {
+  var tx = db.transaction([objectStoreName], 'readwrite');
+  var store = tx.objectStore(objectStoreName);
+  var req = store.openCursor();
+
+  req.onsuccess = function (event) {
+    var cursor = event.target.result;
+
+    if (cursor != null) {
+      if (cursor.value.id === id) {
+        var updateData = cursor.value;
+        updateData.score[scoreName] = value;
+        var updateReq = cursor.update(updateData);
+
+        updateReq.onsuccess = function () {
+          callback(null, true);
+        };
+
+        updateReq.onerror = function (_ref3) {
+          var target = _ref3.target;
+          console.error('[indexedDB]: error in cursor update' + target.errorCode);
+          callback(target.errorCode);
+        };
+      }
+
+      cursor["continue"]();
+    } else {
+      callback(null, false);
+    }
+  };
+
+  req.onerror = function (_ref4) {
+    var target = _ref4.target;
+    console.error('[indexedDB]: error in cursor request' + target.errorCode);
+    callback(target.errorCode);
+  };
+};
+/**
+ * Init database
+ * @param {Function} callback
+ */
+
+
+exports.udpatePublicFigureScore = udpatePublicFigureScore;
+
+var initDB = function initDB(callback) {
+  var dbReq = indexedDB.open(databaseName, 1);
+
+  dbReq.onupgradeneeded = function (event) {
+    var db = event.target.result;
+    db.createObjectStore(objectStoreName, {
+      keyPath: 'id',
+      autoIncrement: true
+    });
+  };
+
+  dbReq.onsuccess = function (event) {
+    window.db = event.target.result;
+    if (callback) callback();
+  };
+
+  dbReq.onerror = function (_ref5) {
+    var target = _ref5.target;
+    console.error('[indexedDB]: error in cursor request' + target.errorCode);
+  };
+};
+
+exports.initDB = initDB;
+
+},{}]},{},[11,12,13]);

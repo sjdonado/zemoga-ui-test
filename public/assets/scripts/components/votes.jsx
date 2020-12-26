@@ -1,22 +1,29 @@
 'use strict';
 
+import {
+  initDB,
+  runSeed,
+  getAllPublicFigures,
+  udpatePublicFigureScore,
+} from '../services/database';
+
 import VotingCard from './votingCard.jsx';
 
 function Votes() {
   const [data, setData] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const fetchData = (db) => {
-    if (!db) {
-      initDB((resDB) => fetchData(resDB));
+  const fetchData = () => {
+    if (!window.db) {
+      initDB(() => fetchData());
       return;
     }
-    getAllPublicFigures(db, (err, res) => {
+    getAllPublicFigures(window.db, (err, res) => {
       if (err) {
         return;
       }
       if (res.length === 0) {
-        runSeed(db, () => fetchData());
+        runSeed(window.db, () => fetchData());
         return;
       }
       setData(res);
@@ -25,9 +32,7 @@ function Votes() {
   };
 
   React.useEffect(() => {
-    if (isLoading) {
-      fetchData(window.db);
-    }
+    if (isLoading) fetchData();
   }, [fetchData]);
 
   const saveNewVote = (id, vote) => {

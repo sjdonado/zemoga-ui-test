@@ -3,7 +3,7 @@
 const databaseName = 'ruleOfThumb';
 const objectStoreName = 'publicFigures';
 
-const dbSeed = [
+const DB_SEED = [
   {
     url: 'assets/images/kanye.jpg',
     name: 'Kanye West',
@@ -57,31 +57,31 @@ const dbSeed = [
  * @param {IDBDatabase} db
  * @param {Function} callback
  */
-function runSeed(db, callback) {
+export const runSeed = (db, callback) => {
   const tx = db.transaction([objectStoreName], 'readwrite');
   const store = tx.objectStore(objectStoreName);
 
-  for (let data of dbSeed) {
+  for (let data of DB_SEED) {
     store.add({ ...data, timestamp: Date.now() });
   }
 
   tx.oncomplete = function () {
-    console.log('seed ran');
+    console.log('[indexedDB]: seed ran');
     callback(null, true);
   };
 
-  tx.onerror = function (event) {
-    console.log('error running seed ' + event.target.errorCode);
-    callback(event.target.errorCode);
+  tx.onerror = function ({ target }) {
+    console.error('[indexedDB]: error running seed ' + target.errorCode);
+    callback(target.errorCode);
   };
-}
+};
 
 /**
  * Get all public figures
  * @param {IDBDatabase} db
  * @param {Function} callback
  */
-function getAllPublicFigures(db, callback) {
+export const getAllPublicFigures = (db, callback) => {
   const tx = db.transaction([objectStoreName], 'readonly');
   const store = tx.objectStore(objectStoreName);
 
@@ -97,11 +97,11 @@ function getAllPublicFigures(db, callback) {
       callback(null, publicFigures);
     }
   };
-  req.onerror = function (event) {
-    console.log('error in cursor request' + event.target.errorCode);
-    callback(event.target.errorCode);
+  req.onerror = function ({ target }) {
+    console.error('[indexedDB]: error in cursor request' + target.errorCode);
+    callback(target.errorCode);
   };
-}
+};
 
 /**
  * Update public figure score
@@ -111,7 +111,7 @@ function getAllPublicFigures(db, callback) {
  * @param {Number} value
  * @param {Function} callback
  */
-function udpatePublicFigureScore(db, id, scoreName, value, callback) {
+export const udpatePublicFigureScore = (db, id, scoreName, value, callback) => {
   const tx = db.transaction([objectStoreName], 'readwrite');
   const store = tx.objectStore(objectStoreName);
 
@@ -127,9 +127,11 @@ function udpatePublicFigureScore(db, id, scoreName, value, callback) {
         updateReq.onsuccess = function () {
           callback(null, true);
         };
-        updateReq.onerror = function (event) {
-          console.log('error in cursor update' + event.target.errorCode);
-          callback(event.target.errorCode);
+        updateReq.onerror = function ({ target }) {
+          console.error(
+            '[indexedDB]: error in cursor update' + target.errorCode
+          );
+          callback(target.errorCode);
         };
       }
       cursor.continue();
@@ -137,18 +139,18 @@ function udpatePublicFigureScore(db, id, scoreName, value, callback) {
       callback(null, false);
     }
   };
-  req.onerror = function (event) {
-    console.log('error in cursor request' + event.target.errorCode);
-    callback(event.target.errorCode);
+  req.onerror = function ({ target }) {
+    console.error('[indexedDB]: error in cursor request' + target.errorCode);
+    callback(target.errorCode);
   };
-}
+};
 
 /**
  * Init database
  * @param {Function} callback
  */
-function initDB(callback) {
-  const dbReq = indexedDB.open('ruleOfThumb', 1);
+export const initDB = (callback) => {
+  const dbReq = indexedDB.open(databaseName, 1);
 
   dbReq.onupgradeneeded = function (event) {
     const db = event.target.result;
@@ -156,18 +158,14 @@ function initDB(callback) {
       keyPath: 'id',
       autoIncrement: true,
     });
-    window.db = db;
-    if (callback) callback(db);
   };
 
   dbReq.onsuccess = function (event) {
-    const db = event.target.result;
-    if (callback) callback(db);
+    window.db = event.target.result;
+    if (callback) callback();
   };
 
-  dbReq.onerror = function (event) {
-    console.log('error opening database ' + event.target.errorCode);
+  dbReq.onerror = function ({ target }) {
+    console.error('[indexedDB]: error in cursor request' + target.errorCode);
   };
-}
-
-initDB();
+};
