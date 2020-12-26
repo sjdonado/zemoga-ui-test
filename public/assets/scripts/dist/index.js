@@ -1456,22 +1456,33 @@ function VotingCard(_ref) {
       description = _ref.description,
       score = _ref.score,
       saveNewVote = _ref.saveNewVote;
-  var firstName = name.split(" ")[0];
-  var total = score.thumbsUp + score.thumbsDown;
-  var thumbsUp = Math.round(score.thumbsUp * 100 / total);
-  var thumbsDown = Math.round(score.thumbsDown * 100 / total);
-  var result = thumbsUp > thumbsDown;
-  var thumbDecoratorColor = result ? "blue" : "orange";
-  var thumbDecoratorIcon = result ? "icon-thumb-up" : "icon-thumb-down";
 
   var _React$useState = React.useState(1),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       vote = _React$useState2[0],
       setVote = _React$useState2[1];
 
+  var _React$useState3 = React.useState(false),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      isVoted = _React$useState4[0],
+      setIsVoted = _React$useState4[1];
+
+  var firstName = name.split(" ")[0];
+  var total = score.thumbsUp + score.thumbsDown;
+  var thumbsUp = score.thumbsUp * 100 / total;
+  var thumbsDown = score.thumbsDown * 100 / total;
+  var result = thumbsUp > thumbsDown;
+  var thumbDecoratorColor = result ? "blue" : "orange";
+  var thumbDecoratorIcon = result ? "icon-thumb-up" : "icon-thumb-down";
+
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    saveNewVote(vote);
+
+    if (!isVoted) {
+      saveNewVote(vote);
+    }
+
+    setIsVoted(!isVoted);
   };
 
   return /*#__PURE__*/React.createElement("div", {
@@ -1496,12 +1507,12 @@ function VotingCard(_ref) {
     className: "date"
   }, date), /*#__PURE__*/React.createElement("span", {
     className: "category"
-  }, "in ", category)), /*#__PURE__*/React.createElement("p", {
+  }, " in", " ", category)), /*#__PURE__*/React.createElement("p", {
     className: "card-description"
-  }, description), /*#__PURE__*/React.createElement("form", {
+  }, isVoted ? "Thank you for voting!" : description), /*#__PURE__*/React.createElement("form", {
     className: "card-vote-form",
     onSubmit: handleSubmit
-  }, /*#__PURE__*/React.createElement("input", {
+  }, !isVoted && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("input", {
     type: "radio",
     id: "".concat(firstName, "-radio-thumb-up"),
     className: "radio-button",
@@ -1527,28 +1538,28 @@ function VotingCard(_ref) {
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "".concat(firstName, "-radio-thumb-down"),
     className: "radio-button-label thumb-down"
-  }), /*#__PURE__*/React.createElement("input", {
+  })), /*#__PURE__*/React.createElement("input", {
     type: "submit",
-    value: "Vote now"
+    value: isVoted ? "Vote again" : "Vote Now"
   })))), /*#__PURE__*/React.createElement("div", {
     className: "card-statistics"
   }, /*#__PURE__*/React.createElement("div", {
     className: "blue-alpha",
-    styles: {
+    style: {
       flex: thumbsUp
     }
   }, /*#__PURE__*/React.createElement("span", {
     className: "icon-thumb-up"
   }), /*#__PURE__*/React.createElement("span", {
     className: "score"
-  }, thumbsUp, "%")), /*#__PURE__*/React.createElement("div", {
+  }, thumbsUp.toFixed(0), "%")), /*#__PURE__*/React.createElement("div", {
     className: "orange-alpha",
-    styles: {
+    style: {
       flex: thumbsDown
     }
   }, /*#__PURE__*/React.createElement("span", {
     className: "score"
-  }, thumbsDown, "%"), /*#__PURE__*/React.createElement("span", {
+  }, thumbsDown.toFixed(0), "%"), /*#__PURE__*/React.createElement("span", {
     className: "icon-thumb-down"
   })))));
 }
