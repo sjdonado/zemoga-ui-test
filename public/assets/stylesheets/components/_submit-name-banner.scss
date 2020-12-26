@@ -23,6 +23,9 @@
       text-align: center;
       @include font-format("sm");
       @include respond-to("small") {
+        @include font-format("2xl");
+      }
+      @include respond-to("medium") {
         text-align: left;
         margin-left: 2%;
         @include font-format("3xl");

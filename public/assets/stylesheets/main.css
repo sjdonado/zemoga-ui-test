@@ -372,6 +372,7 @@ input[type=submit],
 input[type=reset],
 input[type=button],
 button {
+  cursor: pointer;
   background: none;
   border: 0;
   color: inherit;
@@ -1062,6 +1063,12 @@ button {
   line-height: 1.25rem;
 }
 @media screen and (min-width: 767px) {
+  .submit-name-banner .container h5 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+@media screen and (min-width: 992px) {
   .submit-name-banner .container h5 {
     text-align: left;
     margin-left: 2%;
