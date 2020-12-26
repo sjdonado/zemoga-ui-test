@@ -81,7 +81,4 @@ function Votes() {
   );
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const e = React.createElement;
-  ReactDOM.render(e(Votes), document.querySelector('#votes'));
-});
+export default Votes;

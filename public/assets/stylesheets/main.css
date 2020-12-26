@@ -481,21 +481,21 @@ footer .social-networks [class*=icon-] {
   }
 }
 
-.votes h2 {
+#votes h2 {
   margin: 24px 7.5%;
   font-weight: lighter;
   text-align: start;
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
-.votes .section-content {
+#votes .section-content {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 0;
 }
 @media screen and (min-width: 767px) {
-  .votes .section-content {
+  #votes .section-content {
     margin: 0 4.6875%;
   }
 }

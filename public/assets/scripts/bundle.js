@@ -1296,6 +1296,23 @@ if (process.env.NODE_ENV === 'production') {
 },{"./cjs/react-is.development.js":8,"./cjs/react-is.production.min.js":9,"_process":2}],11:[function(require,module,exports){
 "use strict";
 
+var _votes = _interopRequireDefault(require("./votes.jsx"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+document.addEventListener('DOMContentLoaded', function () {
+  var e = React.createElement;
+  ReactDOM.render(e(_votes["default"]), document.querySelector('#votes'));
+});
+
+},{"./votes.jsx":12}],12:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
 var _constants = require("../utils/constants.js");
 
 var _database = require("../services/database.js");
@@ -1411,12 +1428,10 @@ function Votes() {
   }))));
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  var e = React.createElement;
-  ReactDOM.render(e(Votes), document.querySelector('#votes'));
-});
+var _default = Votes;
+exports["default"] = _default;
 
-},{"../services/database.js":13,"../utils/constants.js":14,"./votingCard.jsx":12}],12:[function(require,module,exports){
+},{"../services/database.js":14,"../utils/constants.js":15,"./votingCard.jsx":13}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1502,7 +1517,7 @@ function VotingCard(_ref) {
     className: "date"
   }, date), /*#__PURE__*/React.createElement("span", {
     className: "category"
-  }, ' in', ' ', category)), /*#__PURE__*/React.createElement("p", {
+  }, " in ".concat(category))), /*#__PURE__*/React.createElement("p", {
     className: "card-description"
   }, isVoted ? 'Thank you for voting!' : description), /*#__PURE__*/React.createElement("form", {
     className: "card-vote-form",
@@ -1572,7 +1587,7 @@ VotingCard.propTypes = {
 var _default = VotingCard;
 exports["default"] = _default;
 
-},{"../utils/constants.js":14,"prop-types":6}],13:[function(require,module,exports){
+},{"../utils/constants.js":15,"prop-types":6}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1607,7 +1622,7 @@ var runSeed = function runSeed(db, callback) {
   }
 
   tx.oncomplete = function () {
-    console.log('[indexedDB]: seed ran');
+    console.warn('[indexedDB]: seed ran');
     callback(null, true);
   };
 
@@ -1730,7 +1745,7 @@ var initDB = function initDB(callback) {
 
 exports.initDB = initDB;
 
-},{"../utils/constants.js":14}],14:[function(require,module,exports){
+},{"../utils/constants.js":15}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1784,4 +1799,4 @@ var DB_SEED = [{
 }];
 exports.DB_SEED = DB_SEED;
 
-},{}]},{},[11,12,13,14]);
+},{}]},{},[12,13,11,14,15]);

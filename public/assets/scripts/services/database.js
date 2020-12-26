@@ -17,7 +17,7 @@ export const runSeed = (db, callback) => {
   }
 
   tx.oncomplete = () => {
-    console.log('[indexedDB]: seed ran');
+    console.warn('[indexedDB]: seed ran');
     callback(null, true);
   };
 

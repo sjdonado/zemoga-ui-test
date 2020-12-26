@@ -46,9 +46,7 @@ function VotingCard({
             <div className="card-details">
               <span className="date">{date}</span>
               <span className="category">
-                {' in'}
-                {' '}
-                {category}
+                {` in ${category}`}
               </span>
             </div>
             <p className="card-description">

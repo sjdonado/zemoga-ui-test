@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest/globals": true
     },
     "extends": [
         "plugin:react/recommended",
@@ -11,7 +12,8 @@
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly",
         "React": "readonly",
-        "ReactDOM": "readonly"
+        "ReactDOM": "readonly",
+        "cy": "readonly"
     },
     "parserOptions": {
         "ecmaFeatures": {
@@ -21,7 +23,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "jest"
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
@@ -29,9 +32,18 @@
             "error",
             "ignorePackages",
             {
-              "js": "always",
-              "jsx": "always"
+                "js": "always",
+                "jsx": "always"
             }
-         ]
+        ],
+        "no-console": [
+            "error",
+            {
+                "allow": [
+                    "warn",
+                    "error"
+                ]
+            }
+        ]
     }
 }

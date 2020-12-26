@@ -27,7 +27,12 @@ module.exports = (grunt) => {
       },
     },
     eslint: {
-      target: ['public/**/*.jsx'],
+      target: [
+        'public/**/*.jsx',
+        'public/assets/scripts/components/*.js',
+        'public/assets/scripts/services/*.js',
+        'public/assets/scripts/utils/*.js',
+      ],
     },
     browserify: {
       dist: {
@@ -45,7 +50,8 @@ module.exports = (grunt) => {
         },
         files: {
           'public/assets/scripts/bundle.js': [
-            'public/assets/scripts/**/*.jsx',
+            'public/assets/scripts/components/*.jsx',
+            'public/assets/scripts/components/index.js',
             'public/assets/scripts/services/*.js',
             'public/assets/scripts/utils/*.js',
           ],
@@ -125,7 +131,12 @@ module.exports = (grunt) => {
         files: ['public/index.html'],
       },
       js: {
-        files: ['public/assets/scripts/**/*.jsx', 'public/assets/scripts/**/*.js'],
+        files: [
+          'public/assets/scripts/**/*.jsx',
+          'public/assets/scripts/components/*.js',
+          'public/assets/scripts/services/*.js',
+          'public/assets/scripts/utils/*.js',
+        ],
         tasks: ['eslint', 'browserify'],
       },
       css: {
@@ -161,7 +172,5 @@ module.exports = (grunt) => {
     'copy',
     'string-replace',
   ]);
-  grunt.registerTask('lint', [
-    'eslint',
-  ]);
+  grunt.registerTask('lint', ['eslint']);
 };
