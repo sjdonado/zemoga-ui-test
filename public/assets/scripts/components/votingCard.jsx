@@ -85,7 +85,7 @@ function VotingCard({
               )}
               <input
                 type="submit"
-                value={isVoted ? 'Vote again' : 'Vote Now'}
+                value={isVoted ? 'Vote again' : 'Vote now'}
               />
             </form>
           </div>

@@ -13,7 +13,8 @@
         "SharedArrayBuffer": "readonly",
         "React": "readonly",
         "ReactDOM": "readonly",
-        "cy": "readonly"
+        "cy": "readonly",
+        "context": "readonly"
     },
     "parserOptions": {
         "ecmaFeatures": {
