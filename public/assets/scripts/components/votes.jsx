@@ -4,23 +4,31 @@ import VotingCard from './votingCard.jsx';
 
 function Votes() {
   const [data, setData] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
-  React.useEffect(() => {
-    if (!window.db) {
-      initDB(() => location.reload());
+  const fetchData = (db) => {
+    if (!db) {
+      initDB((resDB) => fetchData(resDB));
       return;
     }
-    getAllPublicFigures(window.db, (err, res) => {
+    getAllPublicFigures(db, (err, res) => {
       if (err) {
         return;
       }
       if (res.length === 0) {
-        runSeed(window.db, () => location.reload());
-      } else {
-        setData(res);
+        runSeed(db, () => fetchData());
+        return;
       }
+      setData(res);
+      setIsLoading(false);
     });
-  }, []);
+  };
+
+  React.useEffect(() => {
+    if (isLoading) {
+      fetchData(window.db);
+    }
+  }, [fetchData]);
 
   const saveNewVote = (id, vote) => {
     const obj = data.find((obj) => obj.id === id);
@@ -30,7 +38,10 @@ function Votes() {
     const scoreName = vote === 1 ? 'thumbsUp' : 'thumbsDown';
     const value = obj.score[scoreName] + 1;
 
-    udpatePublicFigureScore(window.db, id, scoreName, value, () => {
+    udpatePublicFigureScore(window.db, id, scoreName, value, (err, res) => {
+      if (err || !res) {
+        return;
+      }
       Object.assign(obj.score, { [scoreName]: value });
       setData([...data]);
     });
@@ -40,18 +51,26 @@ function Votes() {
     <>
       <h2>Votes</h2>
       <div className="section-content">
-        {data.map(({ id, url, name, date, category, description, score }) => (
-          <VotingCard
-            key={id}
-            url={url}
-            name={name}
-            date={date}
-            category={category}
-            description={description}
-            score={score}
-            saveNewVote={(vote) => saveNewVote(id, vote)}
-          />
-        ))}
+        {isLoading ? (
+          <span>Loading...</span>
+        ) : (
+          <>
+            {data.map(
+              ({ id, url, name, date, category, description, score }) => (
+                <VotingCard
+                  key={id}
+                  url={url}
+                  name={name}
+                  date={date}
+                  category={category}
+                  description={description}
+                  score={score}
+                  saveNewVote={(vote) => saveNewVote(id, vote)}
+                />
+              )
+            )}
+          </>
+        )}
       </div>
     </>
   );

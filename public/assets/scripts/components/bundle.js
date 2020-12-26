@@ -1328,28 +1328,41 @@ function Votes() {
       data = _React$useState2[0],
       setData = _React$useState2[1];
 
-  React.useEffect(function () {
-    if (!window.db) {
-      initDB(function () {
-        return location.reload();
+  var _React$useState3 = React.useState(true),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      isLoading = _React$useState4[0],
+      setIsLoading = _React$useState4[1];
+
+  var fetchData = function fetchData(db) {
+    if (!db) {
+      initDB(function (resDB) {
+        return fetchData(resDB);
       });
       return;
     }
 
-    getAllPublicFigures(window.db, function (err, res) {
+    getAllPublicFigures(db, function (err, res) {
       if (err) {
         return;
       }
 
       if (res.length === 0) {
-        runSeed(window.db, function () {
-          return location.reload();
+        runSeed(db, function () {
+          return fetchData();
         });
-      } else {
-        setData(res);
+        return;
       }
+
+      setData(res);
+      setIsLoading(false);
     });
-  }, []);
+  };
+
+  React.useEffect(function () {
+    if (isLoading) {
+      fetchData(window.db);
+    }
+  }, [fetchData]);
 
   var _saveNewVote = function saveNewVote(id, vote) {
     var obj = data.find(function (obj) {
@@ -1362,7 +1375,11 @@ function Votes() {
 
     var scoreName = vote === 1 ? 'thumbsUp' : 'thumbsDown';
     var value = obj.score[scoreName] + 1;
-    udpatePublicFigureScore(window.db, id, scoreName, value, function () {
+    udpatePublicFigureScore(window.db, id, scoreName, value, function (err, res) {
+      if (err || !res) {
+        return;
+      }
+
       Object.assign(obj.score, _defineProperty({}, scoreName, value));
       setData(_toConsumableArray(data));
     });
@@ -1370,7 +1387,7 @@ function Votes() {
 
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "Votes"), /*#__PURE__*/React.createElement("div", {
     className: "section-content"
-  }, data.map(function (_ref) {
+  }, isLoading ? /*#__PURE__*/React.createElement("span", null, "Loading...") : /*#__PURE__*/React.createElement(React.Fragment, null, data.map(function (_ref) {
     var id = _ref.id,
         url = _ref.url,
         name = _ref.name,
@@ -1390,7 +1407,7 @@ function Votes() {
         return _saveNewVote(id, vote);
       }
     });
-  })));
+  }))));
 }
 
 document.addEventListener('DOMContentLoaded', function () {

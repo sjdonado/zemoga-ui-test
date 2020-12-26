@@ -156,11 +156,13 @@ function initDB(callback) {
       keyPath: 'id',
       autoIncrement: true,
     });
-    window.db = event.target.result;
+    window.db = db;
+    if (callback) callback(db);
   };
 
   dbReq.onsuccess = function (event) {
-    window.db = event.target.result;
+    const db = event.target.result;
+    if (callback) callback(db);
   };
 
   dbReq.onerror = function (event) {
