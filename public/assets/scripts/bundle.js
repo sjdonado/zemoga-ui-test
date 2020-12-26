@@ -1548,7 +1548,7 @@ function VotingCard(_ref) {
     checked: vote === _constants.THUMB_DOWN
   }))), /*#__PURE__*/React.createElement("input", {
     type: "submit",
-    value: isVoted ? 'Vote again' : 'Vote Now'
+    value: isVoted ? 'Vote again' : 'Vote now'
   })))), /*#__PURE__*/React.createElement("div", {
     className: "card-statistics"
   }, /*#__PURE__*/React.createElement("div", {

@@ -13,6 +13,7 @@
         "SharedArrayBuffer": "readonly",
         "React": "readonly",
         "ReactDOM": "readonly",
+        "Cypress": "readonly",
         "cy": "readonly",
         "context": "readonly"
     },
