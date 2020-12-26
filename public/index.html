@@ -6,6 +6,9 @@
   <title>Rule of Thumb</title>
   <link rel="stylesheet" href="assets/stylesheets/main.css">
   <link rel="stylesheet" href="assets/fonts/icons/css/Glyphter.css">
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="assets/scripts/dist/index.js"></script>
 </head>
 <body>
   <header>
@@ -72,158 +75,7 @@
     </p>
     <span class="icon-cancel"></span>
   </div>
-  <section class="votes">
-    <h2>Votes</h2>
-    <div class="section-content">
-      <div class="voting-card">
-        <img src="assets/images/kanye.jpg"></img>
-        <div class="card-container">
-          <div class="card-content">
-            <div class="thumb-decorator">
-              <div class="blue"><span class="icon-thumb-up"></span></div>
-            </div>
-            <div class="right-container">
-              <h3>Kanye West</h3>
-              <div class="card-details">
-                <span class="date">1 month ago</span>
-                <span class="category">in Entertainment</span>
-              </div>
-              <p class="card-description">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate,
-                suscipit.
-              </p>
-              <form class="card-vote-form" onsubmit="return false;">
-                <input type="radio" id="kanye-radio-thumb-up" class="radio-button" name="radio-group" checked></input>
-                <label for="kanye-radio-thumb-up" class="radio-button-label thumb-up"></label>
-                <input type="radio" id="kanye-radio-thumb-down" class="radio-button" name="radio-group"></input>
-                <label for="kanye-radio-thumb-down" class="radio-button-label thumb-down"></label>
-                <input type="submit" value="Vote now">
-              </form>
-            </div>
-          </div>
-          <div class="card-statistics">
-            <div class="blue-alpha" style="flex: 64;">
-              <span class="icon-thumb-up"></span>
-              <span class="score">64%</span>
-            </div>
-            <div class="orange-alpha" style="flex: 36;">
-              <span class="score">36%</span>
-              <span class="icon-thumb-down"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="voting-card">
-        <img src="assets/images/mark.jpg"></img>
-        <div class="card-container">
-          <div class="card-content">
-            <div class="thumb-decorator">
-              <div class="orange"><span class="icon-thumb-down"></span></div>
-            </div>
-            <div class="right-container">
-              <h3>Mark Zuckerberg</h3>
-              <div class="card-details">
-                <span class="date">1 month ago</span>
-                <span class="category">in Business</span>
-              </div>
-              <p class="card-description">
-                Thank you for voting!
-              </p>
-              <form class="card-vote-form" onsubmit="return false;">
-                <input type="submit" value="Vote again">
-              </form>
-            </div>
-          </div>
-          <div class="card-statistics">
-            <div class="blue-alpha" style="flex: 36;">
-              <span class="icon-thumb-up"></span>
-              <span class="score">36%</span>
-            </div>
-            <div class="orange-alpha" style="flex: 64;">
-              <span class="score">64%</span>
-              <span class="icon-thumb-down"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="voting-card">
-        <img src="assets/images/cristina.jpg"></img>
-        <div class="card-container">
-          <div class="card-content">
-            <div class="thumb-decorator">
-              <div class="orange"><span class="icon-thumb-down"></span></div>
-            </div>
-            <div class="right-container">
-              <h3>Cristina Fernández de Kirchner</h3>
-              <div class="card-details">
-                <span class="date">1 month ago</span>
-                <span class="category">in Politics</span>
-              </div>
-              <p class="card-description">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate,
-                suscipit.
-              </p>
-              <form class="card-vote-form" onsubmit="return false;">
-                <input type="radio" id="cristina-radio-thumb-up" class="radio-button" name="radio-group" checked></input>
-                <label for="cristina-radio-thumb-up" class="radio-button-label thumb-up"></label>
-                <input type="radio" id="cristina-radio-thumb-down" class="radio-button" name="radio-group"></input>
-                <label for="cristina-radio-thumb-down" class="radio-button-label thumb-down"></label>
-                <input type="submit" value="Vote now">
-              </form>
-            </div>
-          </div>
-          <div class="card-statistics">
-            <div class="blue-alpha" style="flex: 36;">
-              <span class="icon-thumb-up"></span>
-              <span class="score">36%</span>
-            </div>
-            <div class="orange-alpha" style="flex: 64;">
-              <span class="score">64%</span>
-              <span class="icon-thumb-down"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="voting-card">
-        <img src="assets/images/malala.jpg"></img>
-        <div class="card-container">
-          <div class="card-content">
-            <div class="thumb-decorator">
-              <div class="blue"><span class="icon-thumb-up"></span></div>
-            </div>
-            <div class="right-container">
-              <h3>Malala Yousafzai</h3>
-              <div class="card-details">
-                <span class="date">1 month ago</span>
-                <span class="category">in Entertainment</span>
-              </div>
-              <p class="card-description">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate,
-                suscipit.
-              </p>
-              <form class="card-vote-form" onsubmit="return false;">
-                <input type="radio" id="malala-radio-thumb-up" class="radio-button" name="radio-group" checked></input>
-                <label for="malala-radio-thumb-up" class="radio-button-label thumb-up"></label>
-                <input type="radio" id="malala-radio-thumb-down" class="radio-button" name="radio-group"></input>
-                <label for="malala-radio-thumb-down" class="radio-button-label thumb-down"></label>
-                <input type="submit" value="Vote now">
-              </form>
-            </div>
-          </div>
-          <div class="card-statistics">
-            <div class="blue-alpha" style="flex: 64;">
-              <span class="icon-thumb-up"></span>
-              <span class="score">64%</span>
-            </div>
-            <div class="orange-alpha" style="flex: 36;">
-              <span class="score">36%</span>
-              <span class="icon-thumb-down"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section id="votes" class="votes"></section>
   <div class="submit-name-banner">
     <div class="container">
       <h5>Is there anyone else you would want us to add?</h5>

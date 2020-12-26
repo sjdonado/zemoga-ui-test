@@ -21,9 +21,29 @@ module.exports = (grunt) => {
       html: {
         files: ['public/index.html'],
       },
+      js: {
+        files: '**/*.jsx',
+        tasks: ['browserify'],
+      },
       css: {
         files: '**/*.scss',
         tasks: ['sass'],
+      },
+    },
+    browserify: {
+      options: {
+        transform: [
+          ['babelify', {
+            sourceMap: true,
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: ['@babel/plugin-transform-modules-commonjs'],
+          }]
+        ],
+      },
+      dist: {
+        files: {
+          'public/assets/scripts/dist/index.js': ['public/assets/scripts/components/*.jsx']
+        },
       },
     },
     sass: {
@@ -41,8 +61,9 @@ module.exports = (grunt) => {
   
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
    
-  grunt.registerTask('default', ['sass', 'connect', 'watch']);
+  grunt.registerTask('default', ['sass', 'browserify', 'connect', 'watch']);
 }
  
