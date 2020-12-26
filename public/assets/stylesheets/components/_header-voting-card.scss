@@ -9,7 +9,7 @@ $card-width: 390px;
     h5,
     p {
       font-weight: 200;
-      color: $light-grey;
+      color: $grey-card-light;
     }
     h5 {
       @include font-format("sm");

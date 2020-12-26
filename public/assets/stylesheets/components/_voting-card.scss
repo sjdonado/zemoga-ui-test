@@ -113,7 +113,7 @@ $card-width: 269px;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
-      vertical-align: center;
+      align-items: center;
       input,
       label {
         margin: auto 4px;

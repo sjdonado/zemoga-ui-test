@@ -1,0 +1,59 @@
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 36px $page-margin;
+  border-top: 1px dotted $grey;
+  ul {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+    @include font-format("2xs");
+    a,
+    span {
+      color: $grey;
+    }
+    @include respond-to("small") {
+      @include font-format("xs");
+      margin: 32px 0;
+    }
+  }
+  .company-links {
+    justify-content: center;
+    min-width: 272px;
+    li {
+      margin-right: 16px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    @include respond-to("small") {
+      justify-content: flex-start;
+    }
+  }
+  .social-networks {
+    justify-content: center;
+    min-width: 272px;
+    li {
+      margin-left: 16px;
+      &:first-child {
+        margin-left: 0;
+      }
+      a {
+        display: table;
+      }
+    }
+    [class*="icon-"] {
+      display: table-cell;
+      vertical-align: center;
+      color: $grey-dark;
+      @include font-format("2xl");
+    }
+    @include respond-to("small") {
+      justify-content: flex-end;
+    }
+  }
+}

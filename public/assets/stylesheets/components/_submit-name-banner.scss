@@ -1,6 +1,7 @@
 .submit-name-banner {
   height: 80px;
   margin: 12px $page-margin;
+  margin-top: 0;
   background-image: url("../images/add-celebrity.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -10,7 +11,7 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    color: $grey-card;
+    color: $grey;
     width: 100%;
     height: 100%;
     background-color: rgba($color: $white, $alpha: 0.82);
@@ -33,7 +34,8 @@
         margin: auto;
         height: 30px;
         width: 120px;
-        border: 2px solid black;
+        color: $grey-dark;
+        border: 2px solid $grey-dark;
         @include font-format("sm");
         @include respond-to("small") {
           margin: 0;

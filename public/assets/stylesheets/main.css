@@ -393,6 +393,17 @@ button::-moz-focus-inner {
   padding: 0;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
 header {
   background-image: url("../images/pope.jpg");
   background-color: #cccccc;
@@ -401,8 +412,76 @@ header {
   background-position: 0 0;
 }
 
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 36px 7.5%;
+  border-top: 1px dotted #666666;
+}
+footer ul {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+  font-size: 0.675rem;
+  line-height: 0.975rem;
+}
+footer ul a,
+footer ul span {
+  color: #666666;
+}
+@media screen and (min-width: 767px) {
+  footer ul {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin: 32px 0;
+  }
+}
+footer .company-links {
+  justify-content: center;
+  min-width: 272px;
+}
+footer .company-links li {
+  margin-right: 16px;
+}
+footer .company-links li:last-child {
+  margin-right: 0;
+}
+@media screen and (min-width: 767px) {
+  footer .company-links {
+    justify-content: flex-start;
+  }
+}
+footer .social-networks {
+  justify-content: center;
+  min-width: 272px;
+}
+footer .social-networks li {
+  margin-left: 16px;
+}
+footer .social-networks li:first-child {
+  margin-left: 0;
+}
+footer .social-networks li a {
+  display: table;
+}
+footer .social-networks [class*=icon-] {
+  display: table-cell;
+  vertical-align: center;
+  color: #333333;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+@media screen and (min-width: 767px) {
+  footer .social-networks {
+    justify-content: flex-end;
+  }
+}
+
 .votes h2 {
-  margin: 24px 8%;
+  margin: 24px 7.5%;
   font-weight: lighter;
   text-align: start;
   font-size: 2.25rem;
@@ -416,7 +495,7 @@ header {
 }
 @media screen and (min-width: 767px) {
   .votes .section-content {
-    margin: 0 5%;
+    margin: 0 4.6875%;
   }
 }
 
@@ -488,7 +567,7 @@ button {
   background: linear-gradient(to bottom, rgba(60, 60, 60, 0.9), rgba(0, 0, 0, 0));
 }
 .navbar h1 {
-  flex: 4;
+  flex: 5;
   min-width: 100px;
   font-weight: normal;
   color: #fff;
@@ -496,14 +575,14 @@ button {
   line-height: 2rem;
 }
 .navbar .navigation {
-  flex: 6;
+  flex: 5;
   display: flex;
   align-items: center;
   justify-content: space-around;
   visibility: hidden;
   min-width: 314px;
-  max-width: 500px;
-  list-style-type: none;
+  max-width: 440px;
+  color: #ebebeb;
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
@@ -520,12 +599,12 @@ button {
 }
 @media screen and (min-width: 767px) {
   .navbar {
-    padding: 22px 8%;
+    padding: 22px 7.5%;
   }
 }
 @media screen and (min-width: 992px) {
   .navbar {
-    padding: 32px 8% 48px 8%;
+    padding: 32px 7.5% 48px 7.5%;
   }
 }
 
@@ -663,7 +742,7 @@ button {
 }
 @media screen and (min-width: 767px) {
   .header-voting-card {
-    margin-left: 8%;
+    margin-left: 7.5%;
     width: 390px;
     margin-top: 0;
     margin-bottom: 8px;
@@ -735,7 +814,7 @@ button {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 32px 8%;
+  margin: 32px 7.5%;
   padding: 12px;
   background-color: #ebebeb;
 }
@@ -749,20 +828,22 @@ button {
 }
 .info-banner .title-container h5 {
   font-weight: lighter;
+  color: #666666;
+  line-height: normal;
   font-size: 1.125rem;
   line-height: 1.75rem;
-  line-height: normal;
 }
 .info-banner .title-container h4 {
-  color: #1e1e1e;
+  color: #333333;
   line-height: normal;
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
 .info-banner p {
-  flex: 89;
+  flex: 86;
   font-weight: lighter;
   min-width: 260px;
+  color: #666666;
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
@@ -772,7 +853,7 @@ button {
   }
 }
 .info-banner .icon-cancel {
-  flex: 1;
+  flex: 4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -916,7 +997,7 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  vertical-align: center;
+  align-items: center;
 }
 .card-content .right-container .card-vote-form input,
 .card-content .right-container .card-vote-form label {
@@ -954,7 +1035,8 @@ button {
 
 .submit-name-banner {
   height: 80px;
-  margin: 12px 8%;
+  margin: 12px 7.5%;
+  margin-top: 0;
   background-image: url("../images/add-celebrity.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -965,7 +1047,7 @@ button {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  color: #464646;
+  color: #666666;
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.82);
@@ -994,7 +1076,8 @@ button {
   margin: auto;
   height: 30px;
   width: 120px;
-  border: 2px solid black;
+  color: #333333;
+  border: 2px solid #333333;
   font-size: 0.875rem;
   line-height: 1.25rem;
 }

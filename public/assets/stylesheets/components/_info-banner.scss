@@ -15,26 +15,28 @@
     min-width: 158px;
     h5 {
       font-weight: lighter;
-      @include font-format("lg");
+      color: $grey;
       line-height: normal;
+      @include font-format("lg");
     }
     h4 {
-      color: $black;
+      color: $grey-dark;
       line-height: normal;
       @include font-format("3xl");
     }
   }
   p {
-    flex: 89;
+    flex: 86;
     font-weight: lighter;
     min-width: 260px;
+    color: $grey;
     @include font-format("sm");
     @include respond-to("small") {
       padding-left: 6px;
     }
   }
   .icon-cancel {
-    flex: 1;
+    flex: 4;
     display: flex;
     justify-content: center;
     align-items: center;
