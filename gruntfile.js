@@ -4,6 +4,17 @@ const sass = require('node-sass');
 
 module.exports = (grunt) => {
   grunt.initConfig({
+    sass: {
+      options: {
+        implementation: sass,
+        sourceMap: true
+      },
+      dist: {
+        files: {
+          'public/assets/stylesheets/main.css': 'public/assets/stylesheets/main.scss'
+        }
+      }
+    },
     connect: {
       server: {
         options: {
@@ -26,17 +37,6 @@ module.exports = (grunt) => {
         tasks: ['sass'],
       },
     },
-    sass: {
-      options: {
-        implementation: sass,
-        sourceMap: true
-      },
-      dist: {
-        files: {
-          'public/assets/stylesheets/main.css': 'public/assets/stylesheets/main.scss'
-        }
-      }
-    },
   });
   
   grunt.loadNpmTasks('grunt-contrib-connect');
@@ -44,5 +44,6 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-contrib-watch');
    
   grunt.registerTask('default', ['sass', 'connect', 'watch']);
+  grunt.registerTask('build', ['sass']);
 }
  

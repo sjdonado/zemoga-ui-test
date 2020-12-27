@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "rule-of-thumb-1c13c"
+  },
+  "targets": {
+    "rule-of-thumb-1c13c": {
+      "hosting": {
+        "layout": [
+          "rule-of-thumb-1c13c"
+        ],
+        "interactive": [
+          "rule-of-thumb-sjdonado"
+        ]
+      }
+    }
+  }
+}
