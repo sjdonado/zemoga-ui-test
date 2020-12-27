@@ -1,32 +1,28 @@
+.radio-button,
+.radio-button-label {
+  cursor: pointer;
+  margin: 2px;
+}
+
 .radio-button {
-  opacity: 0;
+  display: none;
   position: absolute;
+  margin: 0;
 }
 
 .radio-button-label:before {
-  display: inline-block;
+  display: table-cell;
+  position: relative;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  text-align: center;
   font-family: "Glyphter";
   font-style: normal;
   font-weight: normal;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.radio-button,
-.radio-button-label {
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: middle;
-  margin: 2px;
-}
-
-.radio-button + .radio-button-label:before {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  width: 24px;
-  height: 24px;
 }
 
 .thumb-up:before {
