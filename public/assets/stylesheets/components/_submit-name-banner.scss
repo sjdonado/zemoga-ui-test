@@ -1,0 +1,56 @@
+.submit-name-banner {
+  height: 80px;
+  margin: 12px $page-margin;
+  margin-top: 0;
+  background-image: url("../images/add-celebrity.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    color: $grey;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: $white, $alpha: 0.82);
+    h5 {
+      flex: 8;
+      vertical-align: middle;
+      font-weight: lighter;
+      min-width: 268px;
+      text-align: center;
+      @include font-format("sm");
+      @include respond-to("small") {
+        @include font-format("2xl");
+      }
+      @include respond-to("medium") {
+        text-align: left;
+        margin-left: 2%;
+        @include font-format("3xl");
+      }
+    }
+    .right-wrapper {
+      flex: 2;
+      button {
+        margin: auto;
+        height: 30px;
+        width: 120px;
+        color: $grey-dark;
+        border: 2px solid $grey-dark;
+        @include font-format("sm");
+        @include respond-to("small") {
+          margin: 0;
+          margin-left: auto;
+          height: 40px;
+          width: 180px;
+          @include font-format("lg");
+        }
+      }
+      @include respond-to("small") {
+        margin-right: 2%;
+      }
+    }
+  }
+}

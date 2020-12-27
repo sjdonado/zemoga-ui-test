@@ -1,0 +1,28 @@
+/// Mixin to manage responsive breakpoints
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint: map-get($breakpoints, $breakpoint);
+    @media screen and (min-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+/// CSS3 rotation
+/// @param {Number} $degrees
+@mixin rotation($degrees) {
+  -ms-transform: rotate($degrees);
+  -webkit-transform: rotate($degrees);
+  transform: rotate($degrees);
+}
+
+/// Font format
+/// @param {String} $size - Font size name
+/// @require $font-sizes
+@mixin font-format($size: "base") {
+  @each $property-name, $property-value in map-get($font-sizes, $size) {
+    #{$property-name}: $property-value;
+  }
+}

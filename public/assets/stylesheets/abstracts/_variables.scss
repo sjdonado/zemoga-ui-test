@@ -1,2 +1,90 @@
 // Global page right-left margin
-$page-margin: 24px;
+$page-margin: 7.5%;
+
+// Colors palette
+$white: #fff;
+$black: rgb(30, 30, 30);
+$grey: #666666;
+$grey-dark: #333333;
+$orange: #ffad1d;
+$blue: #1cbbb4;
+$grey-card: #464646;
+$grey-card-light: #ebebeb;
+$orange-alpha: rgba(
+  $color: #ffad1d,
+  $alpha: 0.8,
+);
+$blue-alpha: rgba(
+  $color: #1cbbb4,
+  $alpha: 0.8,
+);
+
+// source: https://tailwindcss.com/docs/font-size
+$font-sizes: (
+  "6xs": (
+    font-size: 0.475rem,
+    line-height: 0.8rem,
+  ),
+  "5xs": (
+    font-size: 0.55rem,
+    line-height: 0.85rem,
+  ),
+  "4xs": (
+    font-size: 0.575rem,
+    line-height: 0.875rem,
+  ),
+  "3xs": (
+    font-size: 0.65rem,
+    line-height: 0.95rem,
+  ),
+  "2xs": (
+    font-size: 0.675rem,
+    line-height: 0.975rem,
+  ),
+  "xs": (
+    font-size: 0.75rem,
+    line-height: 1rem,
+  ),
+  "sm": (
+    font-size: 0.875rem,
+    line-height: 1.25rem,
+  ),
+  "base": (
+    font-size: 1rem,
+    line-height: 1.5rem,
+  ),
+  "lg": (
+    font-size: 1.125rem,
+    line-height: 1.75rem,
+  ),
+  "xl": (
+    font-size: 1.25rem,
+    line-height: 1.75rem,
+  ),
+  "2xl": (
+    font-size: 1.5rem,
+    line-height: 2rem,
+  ),
+  "3xl": (
+    font-size: 1.875rem,
+    line-height: 2.25rem,
+  ),
+  "4xl": (
+    font-size: 2.25rem,
+    line-height: 2.5rem,
+  ),
+  "5xl": (
+    font-size: 3rem,
+    line-height: 1,
+  ),
+  "6xl": (
+    font-size: 3.75rem,
+    line-height: 1,
+  ),
+);
+
+$breakpoints: (
+  "small": 767px,
+  "medium": 992px,
+  "large": 1200px,
+);

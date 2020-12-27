@@ -1,0 +1,17 @@
+#votes {
+  h2 {
+    margin: 24px $page-margin;
+    font-weight: lighter;
+    text-align: start;
+    @include font-format("4xl");
+  }
+  .section-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 0;
+    @include respond-to("small") {
+      margin: 0 $page-margin / 1.6;
+    }
+  }
+}

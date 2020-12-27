@@ -1,0 +1,69 @@
+$card-width: 390px;
+
+.header-voting-card {
+  width: 100%;
+  color: $white;
+  .content {
+    padding: 24px 48px 0 24px;
+    background-color: rgba($color: $grey-card, $alpha: 0.527);
+    h5,
+    p {
+      font-weight: 200;
+      color: $grey-card-light;
+    }
+    h5 {
+      @include font-format("sm");
+    }
+    h2 {
+      color: $white;
+      font-weight: normal;
+      @include font-format("5xl");
+    }
+    .more-info {
+      display: flex;
+      align-items: center;
+      @include font-format("xs");
+      text-decoration: underline;
+      font-weight: lighter;
+      span {
+        padding-top: 4px;
+        padding-right: 2px;
+        font-size: 14px;
+      }
+    }
+    p {
+      @include font-format("lg");
+      line-height: normal;
+    }
+    h3 {
+      padding: 24px 0;
+      color: $white;
+      @include font-format("sm");
+    }
+  }
+  .thumb-btns {
+    display: flex;
+    button {
+      padding: 12px 0;
+      @include font-format("3xl");
+    }
+  }
+  @include respond-to("small") {
+    margin-left: $page-margin;
+    width: $card-width;
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+  @include respond-to("medium") {
+    margin-top: 4%;
+    margin-bottom: 7%;
+  }
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .header-voting-card > .content {
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    background-color: rgba($color: $grey-card, $alpha: 0.5);
+  }
+}

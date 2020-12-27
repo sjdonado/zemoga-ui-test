@@ -1,0 +1,28 @@
+div,
+button,
+input[type="radio"] {
+  &.orange {
+    color: $white;
+    background-color: $orange;
+  }
+  &.orange-alpha {
+    color: $white;
+    background-color: $orange-alpha;
+  }
+  &.blue {
+    color: $white;
+    background-color: $blue;
+  }
+  &.blue-alpha {
+    color: $white;
+    background-color: $blue-alpha;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: $grey-card;
+}

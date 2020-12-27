@@ -1,0 +1,52 @@
+.info-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 32px $page-margin;
+  padding: 12px;
+  background-color: $grey-card-light;
+  .title-container {
+    flex: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 158px;
+    h5 {
+      font-weight: lighter;
+      color: $grey;
+      line-height: normal;
+      @include font-format("lg");
+    }
+    h4 {
+      color: $grey-dark;
+      line-height: normal;
+      @include font-format("3xl");
+    }
+  }
+  p {
+    flex: 86;
+    font-weight: lighter;
+    min-width: 260px;
+    color: $grey;
+    @include font-format("sm");
+    @include respond-to("small") {
+      padding-left: 6px;
+    }
+  }
+  .icon-cancel {
+    flex: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 260px;
+    @include font-format("xs");
+    @include respond-to("small") {
+      min-width: 22px;
+    }
+  }
+  @include respond-to("small") {
+    padding: 6px 12px;
+  }
+}

@@ -1,0 +1,43 @@
+.radio-button, .radio-button > input[type="radio"] {
+  cursor: pointer;
+  margin: 2px;
+}
+
+.radio-button > input[type="radio"] {
+  display: none;
+  position: absolute;
+  margin: 0;
+}
+
+.radio-button::before {
+  display: table-cell;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  width: 24px;
+  height: 24px;
+  font-family: "Glyphter";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.checked {
+  border: 1px solid $white;
+}
+
+.thumb-up::before {
+  content: "\0045";
+  background: $blue;
+  border: 1px solid $blue;
+  @include font-format("sm");
+}
+
+.thumb-down::before {
+  content: "\0046";
+  background: $orange;
+  border: 1px solid $orange;
+  @include font-format("sm");
+}

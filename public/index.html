@@ -4,34 +4,99 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rule of Thumb</title>
+
   <link rel="stylesheet" href="assets/stylesheets/main.css">
+  <link rel="stylesheet" href="assets/fonts/icons/css/Glyphter.css">
+
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="assets/scripts/bundle.js"></script>
 </head>
 <body>
   <header>
     <div class="navbar">
+      <input type="checkbox" id="change-hamburguer" />
+      <a class="hamburguer" href="#">
+        <span></span>
+        <label for="change-hamburguer"></label>
+      </a>
       <h1>Rule of Thumb.</h1>
-      <a>Past Trials</a>
-      <a>How It Works</a>
-      <a>Log in/Sign Up</a>
+      <ul class="navigation">
+        <li><a href="#" target="_blank">Past Trials</a></li>
+        <li><a href="#" target="_blank">How It Works</a></li>
+        <li><a href="#" target="_blank">Log in / Sign Up</a></li>
+        <li><span class="icon-search"></span></li>
+      </ul>
     </div>
-    <div class="header-card">
-      <h5>What's your opinion on</h5>
-      <h2>Pope Francis?</h2>
-      <p>
-        He's talking tough on clergy sexual abuse, but is he just another papal
-        pervert protector? (thumbs down) or a true pedophile punishing pontiff?
-        (thumbs up)
-      </p>
-      <div class="more-into">
-        <!-- TODO: wikipedia icon -->
-        <a>More information</a>
+    <div class="header-voting-card">
+      <div class="content">
+        <div class="background"></div>
+        <h5>What's your opinion on</h5>
+        <h2>Pope Francis?</h2>
+        <p>
+          He's talking tough on clergy sexual abuse, but is he just another papal
+          pervert protector? (thumbs down) or a true pedophile punishing pontiff?
+          (thumbs up)
+        </p>
+        <div class="more-info">
+          <span class="icon-wikipedia"></span>
+          <a href="#" target="_blank">More information</a>
+        </div>
+        <h3>What's Your Verdict?</h3>
       </div>
-      <h3>What's Your Verdict?</h3>
-      <div class="actions-btns">
-        <button class="thumbs-up"></button>
-        <button class="thumbs-down"></button>
+      <div class="thumb-btns">
+        <button class="blue-alpha">
+          <span class="icon-thumb-up"></span>
+        </button>
+        <button class="orange-alpha">
+          <span class="icon-thumb-down"></span>
+        </button>
+      </div>
+    </div>
+    <div class="closing-in">
+      <div class="left-container">
+        <span>Closing in</span>
+        <span class="icon-right-arrow"></span>
+      </div>
+      <span class="separator"></span>
+      <div class="days-remaining">
+        <span class="counter">22</span>
+        <span>days</span>
       </div>
     </div>
   </header>
+  <div class="info-banner">
+    <div class="title-container">
+      <h5>Speak out. Be heard.</h5>
+      <h4>Be counted</h4>
+    </div>
+    <p>
+      Rule of Thumb is a crowd sourced court of public opinion where anyone and
+      everyone can speak out and speak freely. It's easy: You share your opinion,
+      we analyze and put the data in a public report.
+    </p>
+    <span class="icon-cancel"></span>
+  </div>
+  <section id="votes"></section>
+  <div class="submit-name-banner">
+    <div class="container">
+      <h5>Is there anyone else you would want us to add?</h5>
+      <div class="right-wrapper">
+        <button>Submit a Name</button>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <ul class="company-links">
+      <li><a href="#" target="_blank">Terms and Conditions</a></li>
+      <li><a href="#" target="_blank">Privacy Policy</a></li>
+      <li><a href="#" target="_blank">Contact Us</a></li>
+    </ul>
+    <ul class="social-networks">
+      <li><span>Follow Us</span></li>
+      <li><a href="#" target="_blank"><span class="icon-facebook"></span></a></li>
+      <li><a href="#" target="_blank"><span class="icon-twitter"></span></a></li>
+    </ul>
+  </footer>
 </body>
 </html>
