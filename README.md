@@ -1,5 +1,9 @@
 # Rule of Thumb
 
+## Live demos
+- Interactive: https://rule-of-thumb-sjdonado.web.app/
+- Layout: https://rule-of-thumb-1c13c.web.app/
+
 ## Setup
 - Go to terminal and run:
 ```bash
